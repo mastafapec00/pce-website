@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones } from 'lucide-react';
+import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail } from 'lucide-react';
 
 // 🟢 Rates Data
 const ratesData = [
@@ -149,7 +149,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Counter Section (NEW) */}
+      {/* Stats Counter Section */}
       <section className="py-20 bg-green-900 text-white overflow-hidden relative">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-3 gap-12 text-center">
@@ -187,7 +187,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section (NEW) */}
+      {/* Why Choose Us Section */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
@@ -224,12 +224,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer (NEW) */}
-      <footer className="bg-slate-950 text-slate-400 py-10 text-center">
-        <div className="container mx-auto px-6">
-          <div className="w-16 h-16 bg-green-800 rounded-full flex items-center justify-center text-white font-black text-2xl mx-auto mb-6">PCE</div>
-          <p className="mb-2">© 2026 Pakistan Currency Exchange. All rights reserved.</p>
-          <p className="text-sm opacity-60">Designed for Premium Experience.</p>
+      {/* 🌐 Footer Section (UPDATED) */}
+      <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
+        <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12">
+          
+          {/* Column 1: About */}
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-green-700 rounded-full flex items-center justify-center text-white font-black text-xl shadow-lg">PCE</div>
+              <span className="font-black text-xl tracking-tight text-white uppercase">Pakistan Currency</span>
+            </div>
+            <p className="leading-relaxed opacity-80 mb-6">
+              Pakistan's most trusted currency exchange network, providing secure, fast, and reliable financial solutions across the globe.
+            </p>
+          </div>
+
+          {/* Column 2: Quick Links */}
+          <div>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Company</h4>
+            <ul className="space-y-3 opacity-80 font-medium">
+              <li><a href="#" className="hover:text-green-400 transition">About Us</a></li>
+              <li><a href="#" className="hover:text-green-400 transition">Branch Locator</a></li>
+              <li><a href="#" className="hover:text-green-400 transition">Our Services</a></li>
+              <li><a href="#" className="hover:text-green-400 transition">Careers</a></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Customer Support */}
+          <div>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4>
+            <ul className="space-y-3 opacity-80 font-medium">
+              <li><a href="#" className="hover:text-green-400 transition">Live Exchange Rates</a></li>
+              <li><a href="#" className="hover:text-green-400 transition">File a Complaint</a></li>
+              <li><a href="#" className="hover:text-green-400 transition">Terms & Conditions</a></li>
+              <li><a href="#" className="hover:text-green-400 transition">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Contact Info */}
+          <div>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4>
+            <ul className="space-y-4 opacity-80 font-medium">
+              <li className="flex items-start gap-3">
+                <MapPin size={20} className="text-green-500 shrink-0 mt-0.5" />
+                <span>Head Office, Karachi, Pakistan</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone size={20} className="text-green-500 shrink-0" />
+                <span>UAN: 111-XXX-XXX</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail size={20} className="text-green-500 shrink-0" />
+                <span>info@pce.com.pk</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Copyright Line */}
+        <div className="container mx-auto px-6 pt-8 border-t border-slate-800 text-center opacity-60">
+          <p>© 2026 Pakistan Currency Exchange. All rights reserved.</p>
         </div>
       </footer>
 
