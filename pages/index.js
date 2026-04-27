@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, ArrowRightLeft, Menu, RefreshCcw } from 'lucide-react';
 
-// 🟢 Yahan main ne Asli HD Flags ki links daal di hain
+// 🟢 100% Original aur HD Flags
 const ratesData = [
-  { code: 'USD', name: 'US Dollar', flag: 'https://flagcdn.com/w80/us.png', buy: 278.50, sell: 281.20 },
-  { code: 'GBP', name: 'UK Pound', flag: 'https://flagcdn.com/w80/gb.png', buy: 352.10, sell: 356.40 },
-  { code: 'EUR', name: 'Euro', flag: 'https://flagcdn.com/w80/eu.png', buy: 301.20, sell: 305.80 },
-  { code: 'SAR', name: 'Saudi Riyal', flag: 'https://flagcdn.com/w80/sa.png', buy: 74.15, sell: 74.90 },
-  { code: 'AED', name: 'UAE Dirham', flag: 'https://flagcdn.com/w80/ae.png', buy: 75.80, sell: 76.55 },
+  { code: 'USD', name: 'US Dollar', flag: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/120px-Flag_of_the_United_States.svg.png', buy: 278.50, sell: 281.20 },
+  { code: 'GBP', name: 'UK Pound', flag: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png', buy: 352.10, sell: 356.40 },
+  { code: 'EUR', name: 'Euro', flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/120px-Flag_of_Europe.svg.png', buy: 301.20, sell: 305.80 },
+  { code: 'SAR', name: 'Saudi Riyal', flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Saudi_Arabia.svg/120px-Flag_of_Saudi_Arabia.svg.png', buy: 74.15, sell: 74.90 },
+  { code: 'AED', name: 'UAE Dirham', flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/120px-Flag_of_the_United_Arab_Emirates.svg.png', buy: 75.80, sell: 76.55 },
 ];
 
 export default function Home() {
@@ -80,7 +80,6 @@ export default function Home() {
                   {ratesData.map((rate) => (
                     <tr key={rate.code} className="hover:bg-slate-50 transition-colors group">
                       <td className="py-5 flex items-center gap-4">
-                        {/* Asli Image Flag */}
                         <img src={rate.flag} alt={rate.code} className="w-10 h-10 object-cover rounded-full shadow-sm border border-slate-200" />
                         <div>
                           <p className="font-black text-slate-900 text-lg leading-none">{rate.code}</p>
