@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard } from 'lucide-react';
+import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones } from 'lucide-react';
 
+// 🟢 Rates Data
 const ratesData = [
   { code: 'USD', name: 'US Dollar', flag: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/120px-Flag_of_the_United_States.svg.png', buy: 278.50, sell: 281.20 },
   { code: 'GBP', name: 'UK Pound', flag: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/120px-Flag_of_the_United_Kingdom.svg.png', buy: 352.10, sell: 356.40 },
@@ -10,11 +11,27 @@ const ratesData = [
   { code: 'AED', name: 'UAE Dirham', flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/120px-Flag_of_the_United_Arab_Emirates.svg.png', buy: 75.80, sell: 76.55 },
 ];
 
+// 🟢 Services Data
 const servicesData = [
-  { title: "Western Union", desc: "Send and receive money globally with speed and security. One of the most recognised ways to move money.", icon: <Globe size={32} className="text-green-600" /> },
-  { title: "MoneyGram", desc: "Quick transfers built around speed and security for people who support family and friends abroad.", icon: <Zap size={32} className="text-green-600" /> },
-  { title: "RIA Money Transfer", desc: "Receive money from abroad with broad global coverage and multiple digital payout options.", icon: <ShieldCheck size={32} className="text-green-600" /> },
-  { title: "Telegraphic Transfer", desc: "Secure way to send funds to an overseas bank account for education fees or approved purposes.", icon: <CreditCard size={32} className="text-green-600" /> },
+  { title: "Western Union", desc: "Send and receive money globally with speed and security.", icon: <Globe size={32} className="text-green-600" /> },
+  { title: "MoneyGram", desc: "Quick transfers built around speed and security for your family.", icon: <Zap size={32} className="text-green-600" /> },
+  { title: "RIA Money Transfer", desc: "Receive money from abroad with broad global coverage.", icon: <ShieldCheck size={32} className="text-green-600" /> },
+  { title: "Telegraphic Transfer", desc: "Secure way to send funds to an overseas bank account.", icon: <CreditCard size={32} className="text-green-600" /> },
+];
+
+// 🟢 Why Choose Us Data
+const reasonsData = [
+  { title: "Safe & Secure", desc: "State-of-the-art security for every transaction you make.", icon: <ShieldCheck className="text-green-600" size={32} /> },
+  { title: "Fast Processing", desc: "Swift remittance and exchange services without delays.", icon: <Zap className="text-green-600" size={32} /> },
+  { title: "Global Reach", desc: "Connected with top global financial partners worldwide.", icon: <Globe className="text-green-600" size={32} /> },
+  { title: "24/7 Support", desc: "Dedicated customer care team for your peace of mind.", icon: <Headphones className="text-green-600" size={32} /> }
+];
+
+// 🟢 Stats Data
+const statsData = [
+  { label: "Years' Expertise", value: "25+" },
+  { label: "Branches in Pakistan", value: "150+" },
+  { label: "Trusted Customers", value: "10M+" }
 ];
 
 const partnerLogos = ["Western Union", "MoneyGram", "RIA", "IME", "URemit", "Speed Remit", "HelloPaisa", "ARY Exchange"];
@@ -87,7 +104,6 @@ export default function Home() {
                   {ratesData.map((rate) => (
                     <tr key={rate.code} className="hover:bg-slate-50 transition-colors group">
                       <td className="py-5 flex items-center gap-4">
-                        {/* 🟢 Yahan Crop Wala Masla Fix Kiya Hai */}
                         <img src={rate.flag} alt={rate.code} className="w-10 h-7 object-cover rounded-sm shadow-sm border border-slate-200" />
                         <div>
                           <p className="font-black text-slate-900 text-lg leading-none">{rate.code}</p>
@@ -102,7 +118,7 @@ export default function Home() {
               </table>
             </div>
             <p className="mt-6 text-sm text-slate-500 bg-slate-50 p-4 rounded-xl border border-slate-100">
-              <span className="font-bold text-slate-700">Note:</span> Open-market figures for reference — confirm live rates at your branch before transacting.
+              <span className="font-bold text-slate-700">Note:</span> Open-market figures for reference.
             </p>
           </motion.div>
 
@@ -117,7 +133,6 @@ export default function Home() {
               </div>
               <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm">
                 <div className="flex items-center gap-3 mb-3">
-                  {/* 🟢 Converter Mein Bhi Crop Issue Fix */}
                   <img src={selectedCurrency.flag} alt="Selected Flag" className="w-8 h-5 rounded-sm object-cover border border-white/30" />
                   <label className="text-sm font-bold uppercase tracking-widest text-green-200 block">Select Currency</label>
                 </div>
@@ -134,14 +149,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats Counter Section (NEW) */}
+      <section className="py-20 bg-green-900 text-white overflow-hidden relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid md:grid-cols-3 gap-12 text-center">
+            {statsData.map((stat, index) => (
+              <motion.div key={index} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: index * 0.2 }} viewport={{ once: true }} className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 backdrop-blur-sm">
+                <h3 className="text-6xl font-black mb-2 text-white tracking-tighter">{stat.value}</h3>
+                <p className="text-green-300 font-bold uppercase tracking-widest text-sm">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+      </section>
+
       {/* Our Services Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🌟 Our Premium Services</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Providing fast, secure, and reliable financial solutions to meet your global remittance and exchange needs.</p>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Providing fast, secure, and reliable financial solutions.</p>
           </div>
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {servicesData.map((service, index) => (
               <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-slate-50 border border-slate-100 p-8 rounded-3xl hover:shadow-xl hover:shadow-green-100 transition duration-300 group">
@@ -150,9 +181,27 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
                 <p className="text-slate-600 leading-relaxed text-sm mb-6">{service.desc}</p>
-                <a href="#" className="text-green-700 font-bold flex items-center gap-2 hover:text-green-900 transition">
-                  Learn more <ArrowRightLeft size={16} />
-                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section (NEW) */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2>
+            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full"></div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {reasonsData.map((item, index) => (
+              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group">
+                <div className="mb-6 bg-green-50 w-16 h-16 rounded-2xl flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-slate-900">{item.title}</h3>
+                <p className="text-slate-500 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -164,13 +213,8 @@ export default function Home() {
         <div className="container mx-auto px-6 mb-8 text-center">
           <p className="text-green-300 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p>
         </div>
-        
         <div className="flex whitespace-nowrap overflow-hidden">
-          <motion.div 
-            animate={{ x: ["0%", "-50%"] }} 
-            transition={{ ease: "linear", duration: 20, repeat: Infinity }}
-            className="flex items-center gap-16 pr-16"
-          >
+          <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 20, repeat: Infinity }} className="flex items-center gap-16 pr-16">
             {[...partnerLogos, ...partnerLogos].map((partner, index) => (
               <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-xl">
                 <span className="text-white font-black text-xl tracking-wider opacity-90">{partner}</span>
@@ -179,6 +223,15 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Footer (NEW) */}
+      <footer className="bg-slate-950 text-slate-400 py-10 text-center">
+        <div className="container mx-auto px-6">
+          <div className="w-16 h-16 bg-green-800 rounded-full flex items-center justify-center text-white font-black text-2xl mx-auto mb-6">PCE</div>
+          <p className="mb-2">© 2026 Pakistan Currency Exchange. All rights reserved.</p>
+          <p className="text-sm opacity-60">Designed for Premium Experience.</p>
+        </div>
+      </footer>
 
     </div>
   );
