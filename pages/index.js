@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, ArrowRightLeft, Menu, RefreshCcw } from 'lucide-react';
 
+// 🟢 Yahan main ne Asli HD Flags ki links daal di hain
 const ratesData = [
-  { code: 'USD', name: 'US Dollar', flag: '🇺🇸', buy: 278.50, sell: 281.20 },
-  { code: 'GBP', name: 'UK Pound', flag: '🇬🇧', buy: 352.10, sell: 356.40 },
-  { code: 'EUR', name: 'Euro', flag: '🇪🇺', buy: 301.20, sell: 305.80 },
-  { code: 'SAR', name: 'Saudi Riyal', flag: '🇸🇦', buy: 74.15, sell: 74.90 },
-  { code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', buy: 75.80, sell: 76.55 },
+  { code: 'USD', name: 'US Dollar', flag: 'https://flagcdn.com/w80/us.png', buy: 278.50, sell: 281.20 },
+  { code: 'GBP', name: 'UK Pound', flag: 'https://flagcdn.com/w80/gb.png', buy: 352.10, sell: 356.40 },
+  { code: 'EUR', name: 'Euro', flag: 'https://flagcdn.com/w80/eu.png', buy: 301.20, sell: 305.80 },
+  { code: 'SAR', name: 'Saudi Riyal', flag: 'https://flagcdn.com/w80/sa.png', buy: 74.15, sell: 74.90 },
+  { code: 'AED', name: 'UAE Dirham', flag: 'https://flagcdn.com/w80/ae.png', buy: 75.80, sell: 76.55 },
 ];
 
 export default function Home() {
@@ -79,7 +80,8 @@ export default function Home() {
                   {ratesData.map((rate) => (
                     <tr key={rate.code} className="hover:bg-slate-50 transition-colors group">
                       <td className="py-5 flex items-center gap-4">
-                        <span className="text-3xl shadow-sm rounded-full">{rate.flag}</span>
+                        {/* Asli Image Flag */}
+                        <img src={rate.flag} alt={rate.code} className="w-10 h-10 object-cover rounded-full shadow-sm border border-slate-200" />
                         <div>
                           <p className="font-black text-slate-900 text-lg leading-none">{rate.code}</p>
                           <p className="text-sm text-slate-500 font-medium">{rate.name}</p>
@@ -117,12 +119,15 @@ export default function Home() {
               </div>
 
               <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm">
-                <label className="text-sm font-bold uppercase tracking-widest text-green-200 block mb-3">Select Currency</label>
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={selectedCurrency.flag} alt="Selected Flag" className="w-6 h-6 rounded-full object-cover" />
+                  <label className="text-sm font-bold uppercase tracking-widest text-green-200 block">Select Currency</label>
+                </div>
                 <select 
                   className="w-full bg-white text-slate-900 p-4 rounded-xl text-xl font-bold focus:outline-none focus:ring-4 focus:ring-green-400/50 transition cursor-pointer"
                   onChange={(e) => setSelectedCurrency(ratesData.find(r => r.code === e.target.value))}
                 >
-                  {ratesData.map(r => <option key={r.code} value={r.code}>{r.flag} {r.name} ({r.code})</option>)}
+                  {ratesData.map(r => <option key={r.code} value={r.code}>{r.name} ({r.code})</option>)}
                 </select>
               </div>
 
