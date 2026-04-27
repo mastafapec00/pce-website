@@ -1,8 +1,21 @@
-export default function Home() {
-  return (
-    <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: 'green' }}>Pakistan Currency Exchange 🇵🇰</h1>
-      <p>Aap ki website ka setup kamyab ho gaya hai!</p>
-    </div>
-  );
+{
+  "name": "pce-website",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "framer-motion": "^11.0.3",
+    "lucide-react": "^0.321.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "postcss": "^8.4.31",
+    "autoprefixer": "^10.4.16"
+  }
 }
