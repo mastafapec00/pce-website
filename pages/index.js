@@ -10,15 +10,17 @@ const ratesData = [
   { code: 'AED', name: 'UAE Dirham', flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/120px-Flag_of_the_United_Arab_Emirates.svg.png', buy: 75.80, sell: 76.55 },
 ];
 
+// 🟢 Aap ke bataye hue exact filenames
 const partnerLogos = [
-  { name: "Western Union", url: "/logos/Western Union.png" },
-  { name: "MoneyGram", url: "/logos/MoneyGram.png" },
-  { name: "RIA", url: "/logos/RIA.png" },
-  { name: "IME", url: "/logos/IME.png" },
-  { name: "URemit", url: "/logos/URemit.png" },
-  { name: "Speed Remit", url: "/logos/Speed Remit.png" },
-  { name: "HelloPaisa", url: "/logos/HelloPaisa.png" },
-  { name: "ARY Exchange", url: "/logos/ARY Exchange.png" }
+  { name: "Western Union", url: "/logos/WU logo 2023 (1).png" },
+  { name: "MoneyGram", url: "/logos/MoneyGram_Logo.png" },
+  { name: "RIA", url: "/logos/Ria update logo (1).png" },
+  { name: "IME", url: "/logos/IME Logo (1).png" },
+  { name: "URemit", url: "/logos/Uremit Logo png.png" },
+  { name: "Speed Remit", url: "/logos/Speed Remit Logo.png" },
+  { name: "HelloPaisa", url: "/logos/HelloPaisa LOGO.jpg.jpeg" },
+  { name: "ARY Exchange", url: "/logos/ARY Logo.png" },
+  { name: "Aussie Forex", url: "/logos/Aussie Forex&Finance.png" }
 ];
 
 export default function Home() {
@@ -34,7 +36,8 @@ export default function Home() {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <a href="/" className="flex items-center gap-3">
             <div className="w-14 h-14 rounded-full flex items-center justify-center bg-white shadow-lg overflow-hidden border-2 border-green-700">
-               <img src="/logos/logo.png" alt="PCE Logo" className="w-full h-full object-contain p-1" />
+               {/* 🟢 Aap ka asli PCE logo */}
+               <img src="/logos/Pakistan Currency Logo.png" alt="PCE Logo" className="w-full h-full object-contain p-1" />
             </div>
             <span className="font-black text-xl tracking-tight text-green-900 uppercase">Pakistan Currency</span>
           </a>
@@ -63,7 +66,8 @@ export default function Home() {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="relative">
             <div className="aspect-square bg-gradient-to-br from-green-50 to-green-100 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
-               <img src="/logos/banner.jpg" alt="PCE Banner" className="w-full h-full object-cover" />
+               {/* 🟢 Banner image path */}
+               <img src="/logos/banner.jpg" alt="PCE Banner" className="w-full h-full object-cover" onError={(e) => {e.target.src = "https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=800&q=80"}} />
             </div>
           </motion.div>
         </div>
@@ -78,7 +82,16 @@ export default function Home() {
           <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 20, repeat: Infinity }} className="flex items-center gap-16 pr-16">
             {[...partnerLogos, ...partnerLogos].map((partner, index) => (
               <div key={index} className="px-8 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                <img src={partner.url} alt={partner.name} className="w-full h-full object-contain opacity-90 hover:opacity-100 transition" />
+                <img 
+                  src={partner.url} 
+                  alt={partner.name} 
+                  className="w-full h-full object-contain opacity-90 hover:opacity-100 transition" 
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }} 
+                />
+                <span style={{display: 'none'}} className="text-slate-800 font-black text-xl tracking-wider">{partner.name}</span>
               </div>
             ))}
           </motion.div>
@@ -91,7 +104,8 @@ export default function Home() {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden border border-green-700">
-                 <img src="/logos/logo.png" alt="PCE Logo" className="w-full h-full object-contain p-1" />
+                 {/* 🟢 Footer mein asli PCE logo */}
+                 <img src="/logos/Pakistan Currency Logo.png" alt="PCE Logo" className="w-full h-full object-contain p-1" />
               </div>
               <span className="font-black text-xl tracking-tight text-white uppercase">Pakistan Currency</span>
             </div>
@@ -122,7 +136,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
     </div>
   );
 }
