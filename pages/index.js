@@ -1,28 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp, Facebook, Instagram, MessageCircle } from 'lucide-react';
+import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp, Facebook, Instagram, MessageCircle, Plus, Minus } from 'lucide-react';
 
+// ratesData remains updated from previous turns
 const ratesData = [
-  // Top 5
   { code: 'USD', name: 'US Dollar', flag: 'https://flagcdn.com/w80/us.png', buy: 278.50, sell: 281.20 },
   { code: 'GBP', name: 'UK Pound Sterling', flag: 'https://flagcdn.com/w80/gb.png', buy: 352.10, sell: 356.40 },
   { code: 'EUR', name: 'Euro', flag: 'https://flagcdn.com/w80/eu.png', buy: 301.20, sell: 305.80 },
   { code: 'SAR', name: 'Saudi Riyal', flag: 'https://flagcdn.com/w80/sa.png', buy: 74.15, sell: 74.90 },
   { code: 'AED', name: 'UAE Dirham', flag: 'https://flagcdn.com/w80/ae.png', buy: 75.80, sell: 76.55 },
-  // Extended List
   { code: 'CAD', name: 'Canadian Dollar', flag: 'https://flagcdn.com/w80/ca.png', buy: 205.10, sell: 207.50 },
   { code: 'AUD', name: 'Australian Dollar', flag: 'https://flagcdn.com/w80/au.png', buy: 181.50, sell: 183.80 },
-  { code: 'KWD', name: 'Kuwaiti Dinar', flag: 'https://flagcdn.com/w80/kw.png', buy: 905.20, sell: 910.50 },
-  { code: 'CHF', name: 'Swiss Franc', flag: 'https://flagcdn.com/w80/ch.png', buy: 310.40, sell: 314.10 },
   { code: 'JPY', name: 'Japanese Yen', flag: 'https://flagcdn.com/w80/jp.png', buy: 1.80, sell: 1.85 },
-  { code: 'QAR', name: 'Qatari Riyal', flag: 'https://flagcdn.com/w80/qa.png', buy: 76.40, sell: 77.20 },
-  { code: 'OMR', name: 'Omani Riyal', flag: 'https://flagcdn.com/w80/om.png', buy: 722.50, sell: 728.10 },
-  { code: 'BHD', name: 'Bahrain Dinar', flag: 'https://flagcdn.com/w80/bh.png', buy: 738.10, sell: 743.50 },
-  { code: 'THB', name: 'Thai Baht', flag: 'https://flagcdn.com/w80/th.png', buy: 7.50, sell: 7.75 },
-  { code: 'CNY', name: 'Chinese Yuan', flag: 'https://flagcdn.com/w80/cn.png', buy: 38.40, sell: 39.10 },
-  { code: 'MYR', name: 'Malaysian Ringgit', flag: 'https://flagcdn.com/w80/my.png', buy: 58.60, sell: 59.30 },
-  { code: 'TRY', name: 'Turkish Lira', flag: 'https://flagcdn.com/w80/tr.png', buy: 8.50, sell: 8.80 },
-  { code: 'HKD', name: 'Hong Kong Dollar', flag: 'https://flagcdn.com/w80/hk.png', buy: 35.50, sell: 36.10 }
+  { code: 'CNY', name: 'Chinese Yuan', flag: 'https://flagcdn.com/w80/cn.png', buy: 38.40, sell: 39.10 }
 ];
 
 const newServicesData = [
@@ -33,6 +23,23 @@ const newServicesData = [
   { title: "Help & contact", desc: "Questions about rates, paperwork, or transfers? Reach our team by phone, email, or WhatsApp.", linkText: "Contact us", linkUrl: "/contact", icon: <HelpCircle size={32} /> }
 ];
 
+const faqsData = [
+  { q: "How can I check today's exchange rates?", a: "You can check today's latest buying and selling rates on our website's live rates section or by visiting any Pakistan Currency Exchange branch across the country." },
+  { q: "Where can I exchange foreign currency in Pakistan?", a: "Pakistan Currency Exchange has a massive network of over 150 branches across Pakistan. Simply visit our nearest branch with your valid identification." },
+  { q: "Does PCE offer corporate exchange services?", a: "Yes, we provide specialized foreign exchange and remittance solutions for businesses and corporate clients with competitive rates and dedicated support." },
+  { q: "Can I convert PKR to foreign currency online?", a: "Currently, currency conversion is performed in-person at our branches to comply with SBP regulations, but you can check rates and book transactions via phone." },
+  { q: "How can I find the nearest PCE branch?", a: "Use our Branch Locator tool on the website to find a branch near you, along with contact details and business hours." },
+  { q: "Can I pay my foreign university fees through PCE?", a: "Yes, we facilitate educational fee transfers to foreign universities. You will need to provide the university's offer letter and fee invoice." },
+  { q: "Where can I pay my study abroad related fee?", a: "You can pay study-related expenses including university fees and living expenses at any of our authorized branches following SBP guidelines." },
+  { q: "How can I send personal money abroad?", a: "Personal remittances can be sent through our secure channels (TT/DD) for approved purposes such as family maintenance, medical, or education." },
+  { q: "What currencies are available for Hajj or Umrah?", a: "We maintain ample stocks of Saudi Riyals (SAR) and US Dollars (USD) specifically for pilgrims at very competitive rates." },
+  { q: "Which major currencies are bought and sold at PCE?", a: "We deal in all major global currencies including USD, GBP, EUR, SAR, AED, CAD, AUD, and many more." },
+  { q: "Is PCE a licensed exchange company?", a: "Yes, Pakistan Currency Exchange is a fully licensed Category 'A' Exchange Company, regulated and authorized by the State Bank of Pakistan." },
+  { q: "Can overseas Pakistanis send money via PCE?", a: "Absolutely. We have partnerships with global giants like Western Union and MoneyGram to ensure your family receives money instantly." },
+  { q: "What documents are required for currency exchange?", a: "For most transactions, a valid original CNIC (for Pakistanis) or Passport (for foreigners) is required to comply with AML/KYC regulations." },
+  { q: "Why choose Pakistan Currency Exchange?", a: "With over 25 years of trust, 150+ branches, and competitive rates, we are Pakistan's most reliable name in the foreign exchange industry." }
+];
+
 const reasonsData = [
   { title: "Safe & Secure", desc: "State-of-the-art security for every transaction you make.", icon: <ShieldCheck size={32} /> },
   { title: "Fast Processing", desc: "Swift remittance and exchange services without delays.", icon: <Zap size={32} /> },
@@ -41,9 +48,7 @@ const reasonsData = [
 ];
 
 const statsData = [
-  { label: "Years' Expertise", value: "25+" },
-  { label: "Branches in Pakistan", value: "150+" },
-  { label: "Trusted Customers", value: "10M+" }
+  { label: "Years' Expertise", value: "25+" }, { label: "Branches in Pakistan", value: "150+" }, { label: "Trusted Customers", value: "10M+" }
 ];
 
 const partnerLogos = [
@@ -58,25 +63,42 @@ const partnerLogos = [
   { name: "Aussie Forex", url: "/Aussie Forex&Finance.png", linkUrl: "/services/aussie-forex" }
 ];
 
+function FaqItem({ faq }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-slate-200">
+      <button onClick={() => setIsOpen(!isOpen)} className="w-full py-5 flex items-center justify-between text-left hover:text-green-700 transition-colors group">
+        <span className="text-lg font-bold text-slate-800 group-hover:text-green-700">{faq.q}</span>
+        {isOpen ? <Minus size={20} className="text-green-600" /> : <Plus size={20} className="text-slate-400 group-hover:text-green-600" />}
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+            <p className="pb-6 text-slate-600 leading-relaxed">{faq.a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Home() {
   const [amount, setAmount] = useState(100);
   const [selectedCurrency, setSelectedCurrency] = useState(ratesData[0]);
-  
   const [showAllRates, setShowAllRates] = useState(false);
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
+  
   const displayedRates = showAllRates ? ratesData : ratesData.slice(0, 5);
+  const displayedFaqs = showAllFaqs ? faqsData : faqsData.slice(0, 4);
 
   const result = (amount * selectedCurrency.sell).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      
-      {/* Navigation Bar */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm flex flex-col items-center">
         <div className="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
-          <a href="/" className="flex items-center">
-             <img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-14 sm:h-16 w-auto object-contain" />
-          </a>
-          <div className="hidden md:flex gap-8 justify-center items-center font-bold text-sm uppercase text-slate-700">
+          <a href="/"><img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-14 sm:h-16 w-auto object-contain" /></a>
+          <div className="hidden md:flex gap-8 items-center font-bold text-sm uppercase text-slate-700">
             <a href="/" className="text-green-700 border-b-2 border-green-700 pb-1">Home</a>
             <a href="/about" className="hover:text-green-700 transition">About Us</a>
             <a href="/services" className="hover:text-green-700 transition">Services</a>
@@ -87,10 +109,9 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Banner Section */}
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
-        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start">
+        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="inline-block bg-green-50 text-green-800 font-bold px-4 py-2 rounded-full mb-6 text-sm border border-green-100">🏆 No.1 Currency Exchange in Pakistan</div>
             <h1 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight mb-6">Exchange with <span className="text-green-700">Confidence</span></h1>
             <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">Transparent open-market rates and secure transactions at 150+ branches.</p>
@@ -99,7 +120,6 @@ export default function Home() {
               <button className="bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:border-green-700 hover:text-green-700 transition flex items-center justify-center gap-3"><Phone size={20} /> WhatsApp Us</button>
             </div>
           </motion.div>
-          
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex justify-center w-full">
             <div className="w-full max-w-2xl bg-white rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white inline-block">
                <img src="/Banner.png" alt="PCE Banner" className="w-full h-auto block" />
@@ -108,283 +128,152 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 💱 Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
-          
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 flex flex-col items-center">
-            <div className="p-8 w-full bg-white">
-              <h3 className="text-3xl font-black flex items-center justify-center gap-3 text-green-900">
-                <RefreshCcw size={28} className="text-green-600" /> Today's Live Rates
-              </h3>
-            </div>
-            
+            <div className="p-8 w-full bg-white"><h3 className="text-3xl font-black flex items-center justify-center gap-3 text-green-900 text-center"><RefreshCcw size={28} className="text-green-600" /> Today's Live Rates</h3></div>
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-green-900 text-white text-sm uppercase tracking-wider">
-                    <th className="py-4 px-6 font-bold">Currency</th>
-                    <th className="py-4 px-6 font-bold text-green-300">Buying</th>
-                    <th className="py-4 px-6 font-bold text-red-300">Selling</th>
-                  </tr>
-                </thead>
+                <thead><tr className="bg-green-900 text-white text-sm uppercase tracking-wider"><th className="py-4 px-6 font-bold">Currency</th><th className="py-4 px-6 font-bold text-green-300">Buying</th><th className="py-4 px-6 font-bold text-red-300">Selling</th></tr></thead>
                 <tbody className="divide-y divide-slate-100">
-                  <AnimatePresence>
-                    {displayedRates.map((rate) => (
-                      <motion.tr 
-                        key={rate.code}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="hover:bg-green-100 transition-colors group even:bg-green-50 odd:bg-white"
-                      >
-                        <td className="py-4 px-6 flex items-center gap-4">
-                          <img src={rate.flag} alt={rate.code} className="w-10 h-7 object-cover rounded-sm shadow-sm border border-slate-200" />
-                          <div>
-                            <p className="font-black text-slate-900 text-lg leading-none">{rate.code}</p>
-                            <p className="text-sm text-slate-500 font-medium">{rate.name}</p>
-                          </div>
-                        </td>
-                        <td className="py-4 px-6 font-black text-green-700 text-lg">{rate.buy.toFixed(2)}</td>
-                        <td className="py-4 px-6 font-black text-red-600 text-lg">{rate.sell.toFixed(2)}</td>
-                      </motion.tr>
-                    ))}
-                  </AnimatePresence>
+                  {displayedRates.map((rate) => (
+                    <tr key={rate.code} className="hover:bg-green-100 transition-colors group even:bg-green-50 odd:bg-white">
+                      <td className="py-4 px-6 flex items-center gap-4"><img src={rate.flag} alt={rate.code} className="w-10 h-7 object-cover rounded-sm shadow-sm border border-slate-200" />
+                      <div><p className="font-black text-slate-900 text-lg leading-none">{rate.code}</p><p className="text-sm text-slate-500 font-medium">{rate.name}</p></div></td>
+                      <td className="py-4 px-6 font-black text-green-700 text-lg">{rate.buy.toFixed(2)}</td><td className="py-4 px-6 font-black text-red-600 text-lg">{rate.sell.toFixed(2)}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-
-            <button 
-              onClick={() => setShowAllRates(!showAllRates)} 
-              className="w-full py-4 bg-slate-50 hover:bg-green-700 hover:text-white text-green-800 font-bold flex items-center justify-center gap-2 transition-colors border-t border-slate-200"
-            >
-              {showAllRates ? (
-                <>View Less Currencies <ChevronUp size={20} /></>
-              ) : (
-                <>View All Currencies <ChevronDown size={20} /></>
-              )}
+            <button onClick={() => setShowAllRates(!showAllRates)} className="w-full py-4 bg-slate-50 hover:bg-green-700 hover:text-white text-green-800 font-bold flex items-center justify-center gap-2 transition-colors border-t border-slate-200">
+              {showAllRates ? <>View Less <ChevronUp size={20} /></> : <>View All Currencies <ChevronDown size={20} /></>}
             </button>
           </motion.div>
-
-          <div className="sticky top-24">
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-green-800 to-green-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden flex flex-col justify-center text-center">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-green-700 rounded-full blur-3xl -mr-20 -mt-20 opacity-30"></div>
-              <h3 className="text-3xl font-black mb-8 relative z-10 flex items-center justify-center gap-3">Instant Converter</h3>
-              <div className="space-y-6 relative z-10 w-full">
-                <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm w-full">
-                  <label className="text-sm font-bold uppercase tracking-widest text-green-200 block mb-3">You Give (Amount)</label>
-                  <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full bg-white text-slate-900 p-4 rounded-xl text-3xl font-black focus:outline-none focus:ring-4 focus:ring-green-400/50 transition shadow-inner text-center" />
-                </div>
-                <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm w-full">
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    <img src={selectedCurrency.flag} alt="Selected Flag" className="w-8 h-5 rounded-sm object-cover border border-white/30" />
-                    <label className="text-sm font-bold uppercase tracking-widest text-green-200 block">Select Currency</label>
-                  </div>
-                  <select className="w-full bg-white text-slate-900 p-4 rounded-xl text-xl font-bold focus:outline-none focus:ring-4 focus:ring-green-400/50 transition cursor-pointer text-center" onChange={(e) => setSelectedCurrency(ratesData.find(r => r.code === e.target.value))}>
-                    {ratesData.map(r => <option key={r.code} value={r.code}>{r.name} ({r.code})</option>)}
-                  </select>
-                </div>
-                <div className="pt-6 border-t border-green-700 mt-8">
-                  <p className="text-green-300 text-sm mb-2 uppercase font-bold tracking-widest">Estimated PKR Receiving</p>
-                  <h4 className="text-5xl sm:text-6xl font-black tracking-tighter text-white">Rs. {result}</h4>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+          <div className="sticky top-24"><motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-green-800 to-green-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden flex flex-col justify-center text-center">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-green-700 rounded-full blur-3xl -mr-20 -mt-20 opacity-30"></div>
+            <h3 className="text-3xl font-black mb-8 relative z-10 flex items-center justify-center gap-3">Instant Converter</h3>
+            <div className="space-y-6 relative z-10 w-full">
+              <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm w-full"><label className="text-sm font-bold uppercase tracking-widest text-green-200 block mb-3">You Give (Amount)</label>
+              <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full bg-white text-slate-900 p-4 rounded-xl text-3xl font-black focus:outline-none text-center" /></div>
+              <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm w-full"><div className="flex items-center justify-center gap-3 mb-3"><img src={selectedCurrency.flag} alt="Selected" className="w-8 h-5 rounded-sm" /><label className="text-sm font-bold uppercase tracking-widest text-green-200 block">Select Currency</label></div>
+              <select className="w-full bg-white text-slate-900 p-4 rounded-xl text-xl font-bold focus:outline-none cursor-pointer text-center" onChange={(e) => setSelectedCurrency(ratesData.find(r => r.code === e.target.value))}>
+                {ratesData.map(r => <option key={r.code} value={r.code}>{r.name} ({r.code})</option>)}
+              </select></div>
+              <div className="pt-6 border-t border-green-700 mt-8 text-center"><p className="text-green-300 text-sm mb-2 uppercase font-bold tracking-widest">Estimated PKR Receiving</p><h4 className="text-5xl sm:text-6xl font-black tracking-tighter text-white">Rs. {result}</h4></div>
+            </div></motion.div></div>
         </div>
       </section>
 
-      {/* Stats Counter Section */}
       <section className="py-20 bg-green-900 text-white overflow-hidden relative">
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-3 gap-12 text-center w-full">
-            {statsData.map((stat, index) => (
-              <motion.div key={index} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: index * 0.2 }} viewport={{ once: true }} className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 backdrop-blur-sm flex flex-col items-center">
-                <h3 className="text-6xl font-black mb-2 text-white tracking-tighter">{stat.value}</h3>
-                <p className="text-green-300 font-bold uppercase tracking-widest text-sm">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Services Section */}
-      <section className="py-24 bg-white text-center">
-        <div className="container mx-auto px-6">
-          <div className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Our services</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Currency exchange, live rates, remittance, and support—online and at branches across Pakistan.</p>
-          </div>
-          
-          <div className="flex flex-wrap justify-center gap-6 w-full">
-            {newServicesData.map((service, index) => (
-              <motion.a 
-                href={service.linkUrl} 
-                key={index} 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                transition={{ delay: index * 0.1 }} 
-                viewport={{ once: true }} 
-                className="bg-white border border-slate-200 p-8 rounded-2xl hover:shadow-xl hover:border-green-200 transition duration-300 flex flex-col items-center justify-between text-center w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] group"
-              >
-                <div className="w-20 h-20 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-700 shadow-sm transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:scale-110 group-hover:shadow-md">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-black text-slate-900 mb-3">{service.title}</h3>
-                <p className="text-slate-500 leading-relaxed text-sm mb-6">{service.desc}</p>
-                <div className="text-green-700 font-bold flex items-center justify-center gap-1 group-hover:gap-2 transition-all">
-                  {service.linkText} <ChevronRight size={18} />
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 📞 NAYA SECTION: Get In Touch */}
-      <section className="py-20 bg-green-50 border-t border-b border-green-100">
-        <div className="container mx-auto px-6">
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">📞 Get in touch</h2>
-            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            
-            {/* Button 1: WhatsApp Us */}
-            <a href="https://api.whatsapp.com/send?phone=923046668810&token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEyNSJ9.eyJleHAiOjE3Nzc0NjE4MjUsInBob25lIjoiOTIzMDQ2NjY4ODEwIiwidGV4dCI6IiIsImNvbnRleHQiOiJBZmo5b0hMMTRYaXhpMzVyaFgxSUJBMncwQTdqVDBpLW5TNWg4cnAyRUNweXpQejBVWmROdXU5aXhCaGlSN3lnYWU3YzB0Ulp5cVd0MXVVNjUxNjI0SnhkbXFDUHJhdEdoRjFkUlRoOUUzMkxHOFQ0bGxzeTd5MVkxZmtEbXR6RTcyck9hREdJMUNPZURfa0lvdyIsInNvdXJjZSI6IiIsImFwcCI6ImZhY2Vib29rIn0.VN-rKHEA1xTmcq-8rl4jyfFnJEGp_rYZTZ_Vxj8BA9h3f9UjnLfTda91X16zcebYtqr2K9p5Zl1wsggAVE_BUQ" target="_blank" rel="noopener noreferrer" className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-green-500 transition-all duration-300 flex items-center justify-between group">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                  <MessageCircle size={28} />
-                </div>
-                <span className="text-lg font-bold text-slate-800">WhatsApp us</span>
-              </div>
-              <ChevronRight className="text-slate-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
-            </a>
-
-            {/* Button 2: Find nearest branch */}
-            <a href="/branches" className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-green-500 transition-all duration-300 flex items-center justify-between group">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                  <MapPin size={28} />
-                </div>
-                <span className="text-lg font-bold text-slate-800">Find nearest branch</span>
-              </div>
-              <ChevronRight className="text-slate-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
-            </a>
-
-            {/* Button 3: Submit a complaint */}
-            <a href="/contact" className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-green-500 transition-all duration-300 flex items-center justify-between group">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                  <Mail size={28} />
-                </div>
-                <span className="text-lg font-bold text-slate-800">Submit a complaint</span>
-              </div>
-              <ChevronRight className="text-slate-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
-            </a>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-24 bg-white text-center">
-        <div className="container mx-auto px-6">
-          <div className="mb-16 flex flex-col items-center">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2>
-            <div className="h-1 w-20 bg-green-600 rounded-full"></div>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
-            {reasonsData.map((item, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-slate-50 p-8 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border border-slate-100 group flex flex-col items-center text-center">
-                <div className="mb-6 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:shadow-md border border-slate-100">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-900">{item.title}</h3>
-                <p className="text-slate-500 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Valued Partners Ticker */}
-      <section className="py-12 bg-slate-50 border-t border-slate-200">
-        <div className="container mx-auto px-6 mb-8 text-center">
-          <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p>
-        </div>
-        <div className="flex whitespace-nowrap overflow-hidden">
-          <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
-            {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((partner, index) => (
-              <a href={partner.linkUrl} key={index} className="px-6 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md hover:border-green-300 transition-all shrink-0">
-                <img 
-                  src={partner.url} 
-                  alt={partner.name} 
-                  className="max-w-full max-h-full object-contain opacity-80 group-hover:opacity-100 transition-all grayscale group-hover:grayscale-0 group-hover:scale-105" 
-                />
-              </a>
-            ))}
+        <div className="container mx-auto px-6 relative z-10 text-center"><div className="grid md:grid-cols-3 gap-12">{statsData.map((stat, index) => (
+          <motion.div key={index} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: index * 0.2 }} className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 backdrop-blur-sm">
+            <h3 className="text-6xl font-black mb-2 tracking-tighter">{stat.value}</h3><p className="text-green-300 font-bold uppercase tracking-widest text-sm">{stat.label}</p>
           </motion.div>
+        ))}</div></div>
+      </section>
+
+      <section className="py-24 bg-white text-center">
+        <div className="container mx-auto px-6">
+          <div className="mb-16"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 text-center">Our services</h2><p className="text-lg text-slate-600 max-w-2xl mx-auto">Currency exchange, live rates, remittance, and support—online and at branches across Pakistan.</p></div>
+          <div className="flex flex-wrap justify-center gap-6 w-full">{newServicesData.map((service, index) => (
+            <motion.a href={service.linkUrl} key={index} className="bg-white border border-slate-200 p-8 rounded-2xl hover:shadow-xl hover:border-green-200 transition duration-300 flex flex-col items-center justify-between text-center w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] group">
+              <div className="w-20 h-20 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-700 shadow-sm transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:scale-110">{service.icon}</div>
+              <h3 className="text-xl font-black text-slate-900 mb-3">{service.title}</h3><p className="text-slate-500 leading-relaxed text-sm mb-6">{service.desc}</p>
+              <div className="text-green-700 font-bold flex items-center justify-center gap-1 group-hover:gap-2 transition-all">{service.linkText} <ChevronRight size={18} /></div>
+            </motion.a>
+          ))}</div>
         </div>
       </section>
 
-      {/* Footer Section */}
+      {/* 🚀 FAQ SECTION: Show 4, Toggle for All */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="mb-16 text-center">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Frequently Asked Questions (FAQs)</h2>
+            <p className="text-lg text-slate-500 font-medium">Pakistan Currency Exchange</p>
+            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div>
+          </div>
+          <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+            {displayedFaqs.map((faq, index) => (
+              <FaqItem key={index} faq={faq} />
+            ))}
+            <button onClick={() => setShowAllFaqs(!showAllFaqs)} className="mt-8 w-full py-4 bg-green-50 hover:bg-green-700 hover:text-white text-green-800 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+              {showAllFaqs ? <>Show Less Questions <ChevronUp size={20} /></> : <>View All FAQs <ChevronDown size={20} /></>}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 📞 GET IN TOUCH SECTION: Dark Green Style */}
+      <section className="py-24 bg-green-950 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-green-800/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="mb-12 text-center text-white">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 flex items-center justify-center gap-4">
+              <span className="text-4xl">📞</span> Get in touch
+            </h2>
+            <div className="h-1 w-20 bg-green-500 mx-auto rounded-full"></div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <a href="https://api.whatsapp.com/send?phone=923046668810" target="_blank" className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between">
+              <div className="flex items-center gap-4"><div className="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform"><MessageCircle size={28} /></div><span className="text-lg font-bold text-white">WhatsApp us</span></div>
+              <ChevronRight className="text-green-400 group-hover:translate-x-2 transition-transform" />
+            </a>
+            <a href="/branches" className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between">
+              <div className="flex items-center gap-4"><div className="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform"><MapPin size={28} /></div><span className="text-lg font-bold text-white">Find near branch</span></div>
+              <ChevronRight className="text-green-400 group-hover:translate-x-2 transition-transform" />
+            </a>
+            <a href="/contact" className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between">
+              <div className="flex items-center gap-4"><div className="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform"><Building size={28} /></div><span className="text-lg font-bold text-white">Submit a complaint</span></div>
+              <ChevronRight className="text-green-400 group-hover:translate-x-2 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-white text-center">
+        <div className="container mx-auto px-6">
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">{reasonsData.map((item, index) => (
+            <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-slate-50 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all border border-slate-100 group flex flex-col items-center">
+              <div className="mb-6 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white border border-slate-100">{item.icon}</div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900">{item.title}</h3><p className="text-slate-500 leading-relaxed text-sm">{item.desc}</p>
+            </motion.div>
+          ))}</div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-white border-t border-slate-100 text-center">
+        <div className="container mx-auto px-6 mb-8"><p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p></div>
+        <div className="flex whitespace-nowrap overflow-hidden"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
+          {[...partnerLogos, ...partnerLogos].map((partner, index) => (
+            <a href={partner.linkUrl} key={index} className="px-6 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 group hover:shadow-md shrink-0 transition-all">
+              <img src={partner.url} alt={partner.name} className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all" />
+            </a>
+          ))}
+        </motion.div></div>
+      </section>
+
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
-        <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12 text-center md:text-left">
-          
+        <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
-            <div className="flex items-center mb-6">
-              <img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-12 w-auto object-contain bg-white rounded-lg p-1" />
-            </div>
+            <img src="/Pakistan Currency Logo.png" alt="PCE" className="h-12 w-auto bg-white rounded-lg p-1 mb-6" />
             <p className="leading-relaxed opacity-80 mb-6">Pakistan's most trusted currency exchange network, providing secure and fast financial solutions.</p>
-            
             <div className="flex items-center gap-4">
-              <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all hover:scale-110 shadow-lg">
-                <Facebook size={20} />
-              </a>
-              <a href="https://www.instagram.com/pakistancurrency?igsh=ZjA2NXF6Y3o4MHM4" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all hover:scale-110 shadow-lg">
-                <Instagram size={20} />
-              </a>
-              <a href="https://api.whatsapp.com/send?phone=923046668810&token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEyNSJ9.eyJleHAiOjE3Nzc0NjE4MjUsInBob25lIjoiOTIzMDQ2NjY4ODEwIiwidGV4dCI6IiIsImNvbnRleHQiOiJBZmo5b0hMMTRYaXhpMzVyaFgxSUJBMncwQTdqVDBpLW5TNWg4cnAyRUNweXpQejBVWmROdXU5aXhCaGlSN3lnYWU3YzB0Ulp5cVd0MXVVNjUxNjI0SnhkbXFDUHJhdEdoRjFkUlRoOUUzMkxHOFQ0bGxzeTd5MVkxZmtEbXR6RTcyck9hREdJMUNPZURfa0lvdyIsInNvdXJjZSI6IiIsImFwcCI6ImZhY2Vib29rIn0.VN-rKHEA1xTmcq-8rl4jyfFnJEGp_rYZTZ_Vxj8BA9h3f9UjnLfTda91X16zcebYtqr2K9p5Zl1wsggAVE_BUQ" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all hover:scale-110 shadow-lg">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-              </a>
+              <a href="https://facebook.com/pkcurrency/" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Facebook size={20} /></a>
+              <a href="https://instagram.com/pakistancurrency" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Instagram size={20} /></a>
             </div>
           </div>
-
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Company</h4>
-            <ul className="space-y-3 font-medium">
-              <li><a href="/about" className="hover:text-green-400 transition">About Us</a></li>
-              <li><a href="/branches" className="hover:text-green-400 transition">Branch Locator</a></li>
-              <li><a href="/services" className="hover:text-green-400 transition">Our Services</a></li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4>
-            <ul className="space-y-3 font-medium">
-              <li><a href="/rates" className="hover:text-green-400 transition">Live Exchange Rates</a></li>
-              <li><a href="#" className="hover:text-green-400 transition">Terms & Conditions</a></li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4>
-            <ul className="space-y-4 font-medium">
-              <li className="flex items-center justify-center md:justify-start gap-3 w-full"><MapPin size={20} className="text-green-500 shrink-0" /><span>Head Office, Karachi, Pakistan</span></li>
-              <li className="flex items-center justify-center md:justify-start gap-3 w-full"><Phone size={20} className="text-green-500 shrink-0" /><span>UAN: 111-XXX-XXX</span></li>
-              <li className="flex items-center justify-center md:justify-start gap-3 w-full">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="text-green-500 shrink-0"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                <span>+92-304-6668810</span>
-              </li>
-              <li className="flex items-center justify-center md:justify-start gap-3 w-full"><Mail size={20} className="text-green-500 shrink-0" /><span>info@pce.com.pk</span></li>
-            </ul>
-          </div>
+          <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Company</h4><ul className="space-y-3 font-medium"><li><a href="/about" className="hover:text-green-400">About Us</a></li><li><a href="/branches" className="hover:text-green-400">Branch Locator</a></li></ul></div>
+          <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4><ul className="space-y-3 font-medium"><li><a href="/rates" className="hover:text-green-400">Live Rates</a></li><li><a href="/contact" className="hover:text-green-400">Terms & Conditions</a></li></ul></div>
+          <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4><ul className="space-y-4 font-medium">
+            <li className="flex items-center justify-center md:justify-start gap-3"><MapPin size={20} className="text-green-500" /><span>Head Office, Karachi, Pakistan</span></li>
+            <li className="flex items-center justify-center md:justify-start gap-3"><Phone size={20} className="text-green-500" /><span>UAN: 111-XXX-XXX</span></li>
+            <li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={20} className="text-green-500" /><span>+92-304-6668810</span></li>
+          </ul></div>
         </div>
-         <div className="container mx-auto px-6 pt-8 border-t border-slate-800 text-center opacity-60">
-          <p>© 2026 Pakistan Currency Exchange. All rights reserved.</p>
-        </div>
+        <div className="container mx-auto px-6 pt-8 border-t border-slate-800 text-center opacity-60 mt-12"><p>© 2026 Pakistan Currency Exchange. All rights reserved.</p></div>
       </footer>
     </div>
   );
