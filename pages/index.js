@@ -54,7 +54,6 @@ const blogData = [
   { date: "Sep 15, 2026", title: "Future of Digital Currency", desc: "Discover how technology is reshaping global money transfers across borders.", img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80", link: "/blogs/digital-currency-future" }
 ];
 
-// 🟢 Custom Modern Counter Component
 function AnimatedCounter({ value, suffix = "" }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
@@ -101,10 +100,8 @@ export default function Home() {
   const [amount, setAmount] = useState(100);
   const [selectedCurrency, setSelectedCurrency] = useState(ratesData[0]);
   const [showAllRates, setShowAllRates] = useState(false);
-  const [showAllFaqs, setShowAllFaqs] = useState(false);
   
   const displayedRates = showAllRates ? ratesData : ratesData.slice(0, 5);
-  const displayedFaqs = showAllFaqs ? faqsData : faqsData.slice(0, 4);
 
   const result = (amount * selectedCurrency.sell).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -130,9 +127,9 @@ export default function Home() {
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="inline-block bg-green-50 text-green-800 font-bold px-4 py-2 rounded-full mb-6 text-sm border border-green-100 uppercase tracking-wide">🏆 Cat-A Exchange Company</div>
+            <div className="inline-block bg-green-50 text-green-800 font-bold px-4 py-2 rounded-full mb-6 text-sm border border-green-100 uppercase tracking-wide">Cat-A Exchange Company</div>
             <h1 className="text-5xl lg:text-7xl font-black text-green-950 leading-tight mb-6">Exchange with <span className="text-green-700">Confidence</span></h1>
-            <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">Over 25 years of trust, offering transparent open-market rates at 150+ branches.</p>
+            <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">Over 25 years of trust, offering transparent open-market rates at 150+ branches nationwide.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a href="/rates" className="bg-green-700 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-green-800 transition flex items-center justify-center gap-3">Check Today's Rates <ArrowRightLeft size={20} /></a>
               <button className="bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:border-green-700 hover:text-green-700 transition flex items-center justify-center gap-3"><Phone size={20} /> WhatsApp Us</button>
@@ -185,7 +182,7 @@ export default function Home() {
       {/* 4. Why Choose Us */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🛡️ Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">{reasonsData.map((item, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-slate-50 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all border border-slate-100 group flex flex-col items-center">
               <div className="mb-6 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white border border-slate-100">{item.icon}</div>
@@ -197,7 +194,7 @@ export default function Home() {
 
       {/* 5. Partners */}
       <section className="py-16 bg-slate-50 border-t border-b border-slate-200 text-center">
-        <div className="container mx-auto px-6 mb-12 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🤝 Our Valued Partners</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
+        <div className="container mx-auto px-6 mb-12 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Our Valued Partners</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
         <div className="flex whitespace-nowrap overflow-hidden"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
           {[...partnerLogos, ...partnerLogos].map((partner, index) => (
             <a href={partner.linkUrl} key={index} className="px-6 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 group hover:shadow-md shrink-0 transition-all">
@@ -210,7 +207,7 @@ export default function Home() {
       {/* 6. Services */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
-          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">💼 Our services</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Our services</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
           <div className="flex flex-wrap justify-center gap-6 w-full">{newServicesData.map((service, index) => (
             <motion.a href={service.linkUrl} key={index} className="bg-white border border-slate-200 p-8 rounded-2xl hover:shadow-xl hover:border-green-200 transition duration-300 flex flex-col items-center justify-between text-center w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] group">
               <div className="w-20 h-20 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-700 shadow-sm transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:scale-110">{service.icon}</div>
@@ -221,29 +218,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Stats Counter (Modern Counting Animation) */}
-      <section className="py-24 bg-green-900 text-white overflow-hidden relative">
-        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mb-16"><h2 className="text-4xl md:text-5xl font-black text-white mb-4">📊 Pakistan's Most Trusted</h2><div className="h-1 w-20 bg-white rounded-full"></div></div>
-        <div className="container mx-auto px-6 relative z-10 text-center max-w-5xl"><div className="grid md:grid-cols-3 gap-12">
+      {/* 7. Stats Counter */}
+      <section className="py-24 bg-green-900 text-white overflow-hidden relative text-center">
+        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center mb-16"><h2 className="text-4xl md:text-5xl font-black text-white mb-4">Pakistan's Most Trusted</h2><div className="h-1 w-20 bg-white rounded-full"></div></div>
+        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-3 gap-12 max-w-5xl">
           <div className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 shadow-xl">
-            <h3 className="text-6xl font-black mb-2 tracking-tighter text-white"><AnimatedCounter value="25" suffix="+" /></h3>
+            <h3 className="text-6xl font-black mb-2 text-white"><AnimatedCounter value="25" suffix="+" /></h3>
             <p className="text-green-300 font-bold uppercase tracking-widest text-sm">Years' Expertise</p>
           </div>
           <div className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 shadow-xl">
-            <h3 className="text-6xl font-black mb-2 tracking-tighter text-white"><AnimatedCounter value="150" suffix="+" /></h3>
+            <h3 className="text-6xl font-black mb-2 text-white"><AnimatedCounter value="150" suffix="+" /></h3>
             <p className="text-green-300 font-bold uppercase tracking-widest text-sm">Branches in Pakistan</p>
           </div>
           <div className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 shadow-xl">
-            <h3 className="text-6xl font-black mb-2 tracking-tighter text-white"><AnimatedCounter value="10" suffix="M+" /></h3>
+            <h3 className="text-6xl font-black mb-2 text-white"><AnimatedCounter value="10" suffix="M+" /></h3>
             <p className="text-green-300 font-bold uppercase tracking-widest text-sm">Trusted Customers</p>
           </div>
-        </div></div>
+        </div>
       </section>
 
       {/* 8. Blogs */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">📰 Blogs & News</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Blogs & News</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
           <div className="grid md:grid-cols-3 gap-8">
             {blogData.map((blog, index) => (
               <motion.div key={index} className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all border border-slate-100 flex flex-col group text-left">
@@ -263,8 +260,8 @@ export default function Home() {
       {/* 9. FAQs */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 max-w-4xl border border-slate-200 bg-white p-12 rounded-[2.5rem] shadow-xl">
-          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">❓ Frequently Asked Questions</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
-          <div className="">{displayedFaqs.map((faq, index) => (<FaqItem key={index} faq={faq} />))}</div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Frequently Asked Questions</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
+          <div className="">{faqsData.map((faq, index) => (<FaqItem key={index} faq={faq} />))}</div>
         </div>
       </section>
 
@@ -272,13 +269,13 @@ export default function Home() {
       <section className="py-24 bg-white border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="text-center lg:text-left">
-            <h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🌐 Official Market Updates</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Official Market Updates</h2>
             <div className="h-1 w-20 bg-blue-600 mx-auto lg:mx-0 rounded-full mb-6"></div>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">Stay updated with our latest daily open-market exchange rates directly from our official Facebook page.</p>
-            <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition">Follow us on Facebook</a>
+            <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">Follow us on Facebook</a>
           </div>
           <div className="flex justify-center w-full">
-            <div className="bg-slate-50 rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-[500px] flex justify-center">
+            <div className="bg-slate-50 rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-[500px]">
               <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpkcurrency&tabs=timeline&width=500&height=650&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="650" style={{border:"none", overflow:"hidden", maxWidth: '100%'}} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="PCE Facebook Feed"></iframe>
             </div>
           </div>
@@ -289,19 +286,19 @@ export default function Home() {
       <section className="py-24 bg-green-950 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-green-800/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
         <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black mb-4 flex items-center justify-center gap-4 text-white">📞 Get in touch</h2>
+          <h2 className="text-4xl md:text-5xl font-black mb-4 text-white">Get in touch</h2>
           <div className="h-1 w-20 bg-white mx-auto rounded-full mt-4"></div>
         </div>
-        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <a href="https://api.whatsapp.com/send?phone=923046668810" target="_blank" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white">
+        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-3 gap-8 max-w-5xl">
+          <a href="https://api.whatsapp.com/send?phone=923046668810" target="_blank" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white shadow-xl">
             <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center"><MessageCircle size={32} /></div><span className="text-xl font-bold">WhatsApp us</span></div>
             <ChevronRight size={24} />
           </a>
-          <a href="/branches" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white">
+          <a href="/branches" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white shadow-xl">
             <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center"><MapPin size={32} /></div><span className="text-xl font-bold">Find branch</span></div>
             <ChevronRight size={24} />
           </a>
-          <a href="/contact" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white">
+          <a href="/contact" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white shadow-xl">
             <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center"><Building size={32} /></div><span className="text-xl font-bold">Complaint</span></div>
             <ChevronRight size={24} />
           </a>
@@ -313,7 +310,7 @@ export default function Home() {
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
             <img src="/Pakistan Currency Logo.png" alt="PCE" className="h-12 w-auto bg-white rounded-lg p-1 mb-6" />
-            <p className="leading-relaxed opacity-80 mb-6 text-center md:text-left">Pakistan's most trusted currency exchange network.</p>
+            <p className="leading-relaxed opacity-80 mb-6">Pakistan's most trusted currency exchange network.</p>
             <div className="flex items-center gap-4">
               <a href="https://facebook.com/pkcurrency/" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Facebook size={20} /></a>
               <a href="https://instagram.com/pakistancurrency" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Instagram size={20} /></a>
