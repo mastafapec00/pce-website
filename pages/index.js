@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp, Facebook, Instagram, MessageCircle, Plus, Minus } from 'lucide-react';
+import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp, Facebook, Instagram, MessageCircle, Plus, Minus, ArrowRight } from 'lucide-react';
 
-// ratesData remains updated from previous turns
 const ratesData = [
   { code: 'USD', name: 'US Dollar', flag: 'https://flagcdn.com/w80/us.png', buy: 278.50, sell: 281.20 },
   { code: 'GBP', name: 'UK Pound Sterling', flag: 'https://flagcdn.com/w80/gb.png', buy: 352.10, sell: 356.40 },
@@ -61,6 +60,31 @@ const partnerLogos = [
   { name: "HelloPaisa", url: "/HelloPaisa LOGO.jpg.jpeg", linkUrl: "/services/hellopaisa" },
   { name: "ARY Exchange", url: "/ARY Logo.png", linkUrl: "/services/ary-exchange" },
   { name: "Aussie Forex", url: "/Aussie Forex&Finance.png", linkUrl: "/services/aussie-forex" }
+];
+
+// 🟢 Naya Blog Data
+const blogData = [
+  {
+    date: "Oct 04, 2024",
+    title: "Navigating the Foreign Exchange Market: A Beginner's Guide",
+    desc: "Explore expert tips and insights on navigating the complexities of foreign exchange and making smart decisions.",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80",
+    link: "/blogs/foreign-exchange-guide"
+  },
+  {
+    date: "Sep 28, 2024",
+    title: "Top 5 Reasons to Choose Open Market for Remittance",
+    desc: "Understand why sending and receiving money through official open market channels is best and safe for your family.",
+    img: "https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=600&q=80",
+    link: "/blogs/remittance-reasons"
+  },
+  {
+    date: "Sep 15, 2024",
+    title: "Future of Digital Currency and Global Transfers",
+    desc: "Discover how technology is reshaping the way we send money across international borders in the modern world.",
+    img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80",
+    link: "/blogs/digital-currency-future"
+  }
 ];
 
 function FaqItem({ faq }) {
@@ -186,7 +210,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🚀 FAQ SECTION: Show 4, Toggle for All */}
+      {/* 🚀 FAQ SECTION */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="mb-16 text-center">
@@ -205,7 +229,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📞 GET IN TOUCH SECTION: Dark Green Style */}
+      {/* 📰 NAYA SECTION: Blogs & News */}
+      <section className="py-24 bg-white border-t border-slate-200 text-center">
+        <div className="container mx-auto px-6">
+          <div className="mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">📰 Blogs & News</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Discover industry trends, insights, and expert knowledge in our blog.</p>
+            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {blogData.map((blog, index) => (
+              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col group text-left">
+                <div className="h-56 overflow-hidden relative">
+                  <img src={blog.img} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <span className="text-green-600 font-bold text-sm mb-3 tracking-wider uppercase">{blog.date}</span>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2">{blog.title}</h3>
+                  <p className="text-slate-500 leading-relaxed mb-6 flex-grow line-clamp-3">{blog.desc}</p>
+                  <a href={blog.link} className="inline-flex items-center gap-2 text-green-700 font-bold hover:text-green-800 transition-colors">
+                    Read more <ArrowRight size={18} />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="mt-16 text-center">
+             <a href="/blogs" className="inline-flex items-center justify-center gap-3 bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:border-green-700 hover:text-green-700 transition">View All Articles <ChevronRight size={20} /></a>
+          </div>
+        </div>
+      </section>
+
+      {/* 📞 GET IN TOUCH SECTION */}
       <section className="py-24 bg-green-950 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-green-800/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
         <div className="container mx-auto px-6 relative z-10">
@@ -255,6 +312,7 @@ export default function Home() {
         </motion.div></div>
       </section>
 
+      {/* Footer Section with Updated Numbers */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
@@ -269,8 +327,9 @@ export default function Home() {
           <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4><ul className="space-y-3 font-medium"><li><a href="/rates" className="hover:text-green-400">Live Rates</a></li><li><a href="/contact" className="hover:text-green-400">Terms & Conditions</a></li></ul></div>
           <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4><ul className="space-y-4 font-medium">
             <li className="flex items-center justify-center md:justify-start gap-3"><MapPin size={20} className="text-green-500" /><span>Head Office, Karachi, Pakistan</span></li>
-            <li className="flex items-center justify-center md:justify-start gap-3"><Phone size={20} className="text-green-500" /><span>UAN: 111-XXX-XXX</span></li>
-            <li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={20} className="text-green-500" /><span>+92-304-6668810</span></li>
+            {/* 🟢 Yahan dono naye numbers update kar diye hain */}
+            <li className="flex items-center justify-center md:justify-start gap-3"><Phone size={20} className="text-green-500" /><span>UAN: 0800-13537</span></li>
+            <li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={20} className="text-green-500" /><span>0304-6668810</span></li>
           </ul></div>
         </div>
         <div className="container mx-auto px-6 pt-8 border-t border-slate-800 text-center opacity-60 mt-12"><p>© 2026 Pakistan Currency Exchange. All rights reserved.</p></div>
