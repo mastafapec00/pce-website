@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 
-// 🟢 COMPREHENSIVE RATES DATA (From your images)
 const ratesData = [
   // Top 5
   { code: 'USD', name: 'US Dollar', flag: 'https://flagcdn.com/w80/us.png', buy: 278.50, sell: 281.20 },
@@ -63,7 +62,6 @@ export default function Home() {
   const [amount, setAmount] = useState(100);
   const [selectedCurrency, setSelectedCurrency] = useState(ratesData[0]);
   
-  // 🟢 View More Toggle State
   const [showAllRates, setShowAllRates] = useState(false);
   const displayedRates = showAllRates ? ratesData : ratesData.slice(0, 5);
 
@@ -110,11 +108,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 💱 Live Rates & Converter Section */}
+      {/* Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
           
-          {/* Left: Extendable Rates Table */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 flex flex-col items-center">
             <div className="p-8 w-full bg-white">
               <h3 className="text-2xl font-black flex items-center gap-3 text-green-900">
@@ -124,7 +121,6 @@ export default function Home() {
             
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
-                {/* 🟢 Dark Green Header to fulfill your "Green/White" aesthetic */}
                 <thead>
                   <tr className="bg-green-900 text-white text-sm uppercase tracking-wider">
                     <th className="py-4 px-6 font-bold">Currency</th>
@@ -140,7 +136,6 @@ export default function Home() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        {/* 🟢 Beautiful Zebra Striping: alternating white and light green rows */}
                         className="hover:bg-green-100 transition-colors group even:bg-green-50 odd:bg-white"
                       >
                         <td className="py-4 px-6 flex items-center gap-4">
@@ -159,7 +154,6 @@ export default function Home() {
               </table>
             </div>
 
-            {/* 🟢 View More Button */}
             <button 
               onClick={() => setShowAllRates(!showAllRates)} 
               className="w-full py-4 bg-slate-50 hover:bg-green-700 hover:text-white text-green-800 font-bold flex items-center justify-center gap-2 transition-colors border-t border-slate-200"
@@ -172,7 +166,6 @@ export default function Home() {
             </button>
           </motion.div>
 
-          {/* Right: Instant Converter (Sticky so it stays visible while scrolling the long table) */}
           <div className="sticky top-24">
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-green-800 to-green-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden flex flex-col justify-center text-center">
               <div className="absolute top-0 right-0 w-64 h-64 bg-green-700 rounded-full blur-3xl -mr-20 -mt-20 opacity-30"></div>
