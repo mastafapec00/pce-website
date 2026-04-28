@@ -286,14 +286,12 @@ export default function Home() {
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12 text-center md:text-left">
           
-          {/* Column 1: Logo & Social Media */}
           <div className="flex flex-col items-center md:items-start">
             <div className="flex items-center mb-6">
               <img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-12 w-auto object-contain bg-white rounded-lg p-1" />
             </div>
             <p className="leading-relaxed opacity-80 mb-6">Pakistan's most trusted currency exchange network, providing secure and fast financial solutions.</p>
             
-            {/* 🟢 Social Media Icons Added Here */}
             <div className="flex items-center gap-4">
               <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all hover:scale-110 shadow-lg">
                 <Facebook size={20} />
@@ -302,13 +300,11 @@ export default function Home() {
                 <Instagram size={20} />
               </a>
               <a href="https://api.whatsapp.com/send?phone=923046668810&token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEyNSJ9.eyJleHAiOjE3Nzc0NjE4MjUsInBob25lIjoiOTIzMDQ2NjY4ODEwIiwidGV4dCI6IiIsImNvbnRleHQiOiJBZmo5b0hMMTRYaXhpMzVyaFgxSUJBMncwQTdqVDBpLW5TNWg4cnAyRUNweXpQejBVWmROdXU5aXhCaGlSN3lnYWU3YzB0Ulp5cVd0MXVVNjUxNjI0SnhkbXFDUHJhdEdoRjFkUlRoOUUzMkxHOFQ0bGxzeTd5MVkxZmtEbXR6RTcyck9hREdJMUNPZURfa0lvdyIsInNvdXJjZSI6IiIsImFwcCI6ImZhY2Vib29rIn0.VN-rKHEA1xTmcq-8rl4jyfFnJEGp_rYZTZ_Vxj8BA9h3f9UjnLfTda91X16zcebYtqr2K9p5Zl1wsggAVE_BUQ" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all hover:scale-110 shadow-lg">
-                {/* Custom SVG for WhatsApp exactly matched with Lucide style */}
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               </a>
             </div>
           </div>
 
-          {/* Column 2: Company */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Company</h4>
             <ul className="space-y-3 font-medium">
@@ -318,7 +314,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Column 3: Support */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4>
             <ul className="space-y-3 font-medium">
@@ -327,12 +322,16 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Column 4: Contact Us */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4>
             <ul className="space-y-4 font-medium">
               <li className="flex items-center justify-center md:justify-start gap-3 w-full"><MapPin size={20} className="text-green-500 shrink-0" /><span>Head Office, Karachi, Pakistan</span></li>
               <li className="flex items-center justify-center md:justify-start gap-3 w-full"><Phone size={20} className="text-green-500 shrink-0" /><span>UAN: 111-XXX-XXX</span></li>
+              {/* 🟢 Yahan Naya WhatsApp Number Add Kar Diya Hai */}
+              <li className="flex items-center justify-center md:justify-start gap-3 w-full">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="text-green-500 shrink-0"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>+92-304-6668810</span>
+              </li>
               <li className="flex items-center justify-center md:justify-start gap-3 w-full"><Mail size={20} className="text-green-500 shrink-0" /><span>info@pce.com.pk</span></li>
             </ul>
           </div>
