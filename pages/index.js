@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail } from 'lucide-react';
+import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight } from 'lucide-react';
 
 const ratesData = [
   { code: 'USD', name: 'US Dollar', flag: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/120px-Flag_of_the_United_States.svg.png', buy: 278.50, sell: 281.20 },
@@ -10,12 +10,13 @@ const ratesData = [
   { code: 'AED', name: 'UAE Dirham', flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/120px-Flag_of_the_United_Arab_Emirates.svg.png', buy: 75.80, sell: 76.55 },
 ];
 
-// 🟢 Services Data with Actual Logos
-const servicesData = [
-  { title: "Western Union", desc: "Send and receive money globally with speed and security.", logo: "/WU logo 2023 (1).png" },
-  { title: "MoneyGram", desc: "Quick transfers built around speed and security for your family.", logo: "/MoneyGram_Logo.png" },
-  { title: "RIA Money Transfer", desc: "Receive money from abroad with broad global coverage.", logo: "/Ria update logo (1).png" },
-  { title: "Telegraphic Transfer", desc: "Secure way to send funds to an overseas bank account.", icon: <CreditCard size={40} className="text-green-600" /> },
+// 🟢 NEW SERVICES DATA (Aap ki bheji hui tasveer ke mutabiq)
+const newServicesData = [
+  { title: "Visit a branch", desc: "Buy and sell currency, collect remittance, and get in-person help at 150+ locations across Pakistan.", linkText: "Locate branches", linkUrl: "/branches", icon: <Building size={32} /> },
+  { title: "Live exchange rates", desc: "Check today's open-market buy and sell figures for USD, SAR, AED, EUR, GBP and more against PKR.", linkText: "View rates", linkUrl: "/rates", icon: <LineChart size={32} /> },
+  { title: "What we offer", desc: "Explore currency exchange, remittance, telegraphic transfers, and other solutions we provide.", linkText: "Browse services", linkUrl: "/services", icon: <ClipboardList size={32} /> },
+  { title: "Home remittance", desc: "Receive funds from abroad safely through our branch network with clear guidance at every step.", linkText: "Learn more", linkUrl: "/services/home-remittance", icon: <Wallet size={32} /> },
+  { title: "Help & contact", desc: "Questions about rates, paperwork, or transfers? Reach our team by phone, email, or WhatsApp.", linkText: "Contact us", linkUrl: "/contact", icon: <HelpCircle size={32} /> }
 ];
 
 const reasonsData = [
@@ -51,7 +52,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* 🧭 Navigation Bar - Fixed Logo to match Reference */}
+      {/* 🧭 Navigation Bar */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
           <a href="/" className="flex items-center">
@@ -88,7 +89,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 💱 Live Rates & Converter Section (RESTORED) */}
+      {/* 💱 Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
@@ -149,7 +150,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📊 Stats Counter Section (RESTORED) */}
+      {/* 📊 Stats Counter Section */}
       <section className="py-20 bg-green-900 text-white overflow-hidden relative">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-3 gap-12 text-center">
@@ -163,33 +164,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 💼 Our Services Section (WITH ACTUAL LOGOS NOW) */}
+      {/* 💼 Our Services Section (NEW DESIGN SE REPLACE KIYA HAI) */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🌟 Our Premium Services</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Providing fast, secure, and reliable financial solutions.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Our services</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Currency exchange, live rates, remittance, and support—online and at branches across Pakistan.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {servicesData.map((service, index) => (
-              <motion.a href="/services" key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-slate-50 border border-slate-100 p-8 rounded-3xl hover:shadow-xl hover:shadow-green-100 transition duration-300 group block">
-                {/* 🟢 Yahan Asli Logo Dikhaya Hai */}
-                <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition p-3 border border-slate-100">
-                  {service.logo ? (
-                    <img src={service.logo} alt={service.title} className="w-full h-full object-contain" />
-                  ) : (
-                    service.icon
-                  )}
+          
+          <div className="flex flex-wrap justify-center gap-6">
+            {newServicesData.map((service, index) => (
+              <motion.a 
+                href={service.linkUrl} 
+                key={index} 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ delay: index * 0.1 }} 
+                viewport={{ once: true }} 
+                className="bg-white border border-slate-200 p-8 rounded-2xl hover:shadow-xl hover:border-green-200 transition duration-300 flex flex-col items-center text-center w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] group"
+              >
+                <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:bg-green-100 transition duration-300 text-green-700">
+                  {service.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
-                <p className="text-slate-600 leading-relaxed text-sm">{service.desc}</p>
+                <h3 className="text-xl font-black text-slate-900 mb-3">{service.title}</h3>
+                <p className="text-slate-500 leading-relaxed text-sm mb-6 flex-grow">{service.desc}</p>
+                <div className="text-green-700 font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                  {service.linkText} <ChevronRight size={18} />
+                </div>
               </motion.a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 🛡️ Why Choose Us Section (RESTORED) */}
+      {/* 🛡️ Why Choose Us Section */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
