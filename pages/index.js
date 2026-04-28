@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* Navigation Bar */}
+      {/* 🧭 Navigation Bar */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <a href="/" className="flex items-center">
@@ -68,7 +68,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Banner Section */}
+      {/* 🚀 Hero Banner Section */}
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
@@ -81,20 +81,20 @@ export default function Home() {
             </div>
           </motion.div>
           
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex justify-center">
-            <div className="aspect-[4/3] w-full max-w-lg bg-slate-50 rounded-[2rem] overflow-hidden shadow-xl border-4 border-white">
-               {/* 🟢 BANNER PATH FIXED TO MATCH YOUR EXACT GITHUB FILE NAME */}
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex justify-center w-full">
+            {/* 🟢 Yahan auto-adjust ratio fix kiya hai. 'h-auto' aur 'w-full' se photo ka natural size barkarar rahega. */}
+            <div className="w-full max-w-2xl bg-white rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white inline-block">
                <img 
                  src="/Banner.png" 
                  alt="PCE Banner" 
-                 className="w-full h-full object-cover" 
+                 className="w-full h-auto block" 
                />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Live Rates & Converter Section */}
+      {/* 💱 Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
@@ -155,7 +155,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Counter Section */}
+      {/* 📊 Stats Counter Section */}
       <section className="py-20 bg-green-900 text-white overflow-hidden relative">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-3 gap-12 text-center w-full">
@@ -169,7 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Services Section */}
+      {/* 💼 Our Services Section */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16">
@@ -202,7 +202,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      {/* 🛡️ Why Choose Us Section */}
       <section className="py-24 bg-slate-50 border-t border-slate-200 text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex flex-col items-center">
@@ -223,7 +223,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🤝 Valued Partners Ticker - 🟢 OLD LAYOUT RESTORED */}
+      {/* 🤝 Valued Partners Ticker */}
       <section className="py-12 bg-white border-t border-slate-100">
         <div className="container mx-auto px-6 mb-8 text-center">
           <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p>
@@ -243,7 +243,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer Section */}
+      {/* 🌐 Footer Section */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
