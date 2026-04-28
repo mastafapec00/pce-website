@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp, Facebook, Instagram } from 'lucide-react';
+import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp, Facebook, Instagram, MessageCircle } from 'lucide-react';
 
 const ratesData = [
   // Top 5
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Live Rates & Converter Section */}
+      {/* 💱 Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
           
@@ -241,8 +241,55 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 📞 NAYA SECTION: Get In Touch */}
+      <section className="py-20 bg-green-50 border-t border-b border-green-100">
+        <div className="container mx-auto px-6">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">📞 Get in touch</h2>
+            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            {/* Button 1: WhatsApp Us */}
+            <a href="https://api.whatsapp.com/send?phone=923046668810&token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEyNSJ9.eyJleHAiOjE3Nzc0NjE4MjUsInBob25lIjoiOTIzMDQ2NjY4ODEwIiwidGV4dCI6IiIsImNvbnRleHQiOiJBZmo5b0hMMTRYaXhpMzVyaFgxSUJBMncwQTdqVDBpLW5TNWg4cnAyRUNweXpQejBVWmROdXU5aXhCaGlSN3lnYWU3YzB0Ulp5cVd0MXVVNjUxNjI0SnhkbXFDUHJhdEdoRjFkUlRoOUUzMkxHOFQ0bGxzeTd5MVkxZmtEbXR6RTcyck9hREdJMUNPZURfa0lvdyIsInNvdXJjZSI6IiIsImFwcCI6ImZhY2Vib29rIn0.VN-rKHEA1xTmcq-8rl4jyfFnJEGp_rYZTZ_Vxj8BA9h3f9UjnLfTda91X16zcebYtqr2K9p5Zl1wsggAVE_BUQ" target="_blank" rel="noopener noreferrer" className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-green-500 transition-all duration-300 flex items-center justify-between group">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                  <MessageCircle size={28} />
+                </div>
+                <span className="text-lg font-bold text-slate-800">WhatsApp us</span>
+              </div>
+              <ChevronRight className="text-slate-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
+            </a>
+
+            {/* Button 2: Find nearest branch */}
+            <a href="/branches" className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-green-500 transition-all duration-300 flex items-center justify-between group">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                  <MapPin size={28} />
+                </div>
+                <span className="text-lg font-bold text-slate-800">Find nearest branch</span>
+              </div>
+              <ChevronRight className="text-slate-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
+            </a>
+
+            {/* Button 3: Submit a complaint */}
+            <a href="/contact" className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-green-500 transition-all duration-300 flex items-center justify-between group">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                  <Mail size={28} />
+                </div>
+                <span className="text-lg font-bold text-slate-800">Submit a complaint</span>
+              </div>
+              <ChevronRight className="text-slate-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
+            </a>
+
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us Section */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200 text-center">
+      <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex flex-col items-center">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2>
@@ -250,8 +297,8 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
             {reasonsData.map((item, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border border-slate-100 group flex flex-col items-center text-center">
-                <div className="mb-6 bg-green-50 w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:shadow-md">
+              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-slate-50 p-8 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border border-slate-100 group flex flex-col items-center text-center">
+                <div className="mb-6 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:shadow-md border border-slate-100">
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-slate-900">{item.title}</h3>
@@ -263,7 +310,7 @@ export default function Home() {
       </section>
 
       {/* Valued Partners Ticker */}
-      <section className="py-12 bg-white border-t border-slate-100">
+      <section className="py-12 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 mb-8 text-center">
           <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p>
         </div>
@@ -327,7 +374,6 @@ export default function Home() {
             <ul className="space-y-4 font-medium">
               <li className="flex items-center justify-center md:justify-start gap-3 w-full"><MapPin size={20} className="text-green-500 shrink-0" /><span>Head Office, Karachi, Pakistan</span></li>
               <li className="flex items-center justify-center md:justify-start gap-3 w-full"><Phone size={20} className="text-green-500 shrink-0" /><span>UAN: 111-XXX-XXX</span></li>
-              {/* 🟢 Yahan Naya WhatsApp Number Add Kar Diya Hai */}
               <li className="flex items-center justify-center md:justify-start gap-3 w-full">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="text-green-500 shrink-0"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 <span>+92-304-6668810</span>
