@@ -34,7 +34,13 @@ const statsData = [
   { label: "Trusted Customers", value: "10M+" }
 ];
 
-const partnerLogos = ["Western Union", "MoneyGram", "RIA", "IME", "URemit", "Speed Remit", "HelloPaisa", "ARY Exchange"];
+// 🟢 Partner Logos (HD Images)
+const partnerLogos = [
+  { name: "Western Union", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Western_Union_logo.svg/512px-Western_Union_logo.svg.png" },
+  { name: "MoneyGram", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/MoneyGram_Logo.svg/512px-MoneyGram_Logo.svg.png" },
+  { name: "RIA", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Ria_Money_Transfer_logo.svg/512px-Ria_Money_Transfer_logo.svg.png" },
+  { name: "HelloPaisa", url: "https://hellopaisa.co.za/wp-content/uploads/2021/08/hellopaisa-logo-white-01.png" }, // Using standard text for remaining if image not strictly needed, but let's keep it clean
+];
 
 export default function Home() {
   const [amount, setAmount] = useState(100);
@@ -75,9 +81,15 @@ export default function Home() {
               <button className="bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:border-green-700 hover:text-green-700 transition flex items-center justify-center gap-3"><Phone size={20} /> WhatsApp Us</button>
             </div>
           </motion.div>
+          
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative">
+            {/* 🟢 Asli Professional Image Lagayi Hai Yahan */}
             <div className="aspect-square bg-gradient-to-br from-green-50 to-green-100 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white flex items-center justify-center">
-               <p className="text-green-800/50 font-bold text-2xl text-center px-10">[ Main Banner Visual ]</p>
+               <img 
+                 src="https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=800&q=80" 
+                 alt="Currency Exchange" 
+                 className="w-full h-full object-cover"
+               />
             </div>
           </motion.div>
         </div>
@@ -209,26 +221,30 @@ export default function Home() {
       </section>
 
       {/* Valued Partners Ticker */}
-      <section className="py-12 bg-green-900 overflow-hidden border-t-4 border-green-700">
+      <section className="py-12 bg-slate-100 overflow-hidden border-t border-slate-200">
         <div className="container mx-auto px-6 mb-8 text-center">
-          <p className="text-green-300 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p>
+          <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p>
         </div>
         <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 20, repeat: Infinity }} className="flex items-center gap-16 pr-16">
-            {[...partnerLogos, ...partnerLogos].map((partner, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-xl">
-                <span className="text-white font-black text-xl tracking-wider opacity-90">{partner}</span>
+            {/* 🟢 Yahan Asli Logos Lagaye Hain */}
+            {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((partner, index) => (
+              <div key={index} className="px-8 py-4 flex items-center justify-center w-48 h-20 bg-white rounded-xl shadow-sm border border-slate-100">
+                {partner.url ? (
+                  <img src={partner.url} alt={partner.name} className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition" />
+                ) : (
+                  <span className="text-slate-800 font-black text-xl tracking-wider">{partner.name}</span>
+                )}
               </div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* 🌐 Footer Section (UPDATED) */}
+      {/* Footer Section */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12">
           
-          {/* Column 1: About */}
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-green-700 rounded-full flex items-center justify-center text-white font-black text-xl shadow-lg">PCE</div>
@@ -239,7 +255,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Column 2: Quick Links */}
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Company</h4>
             <ul className="space-y-3 opacity-80 font-medium">
@@ -250,7 +265,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Column 3: Customer Support */}
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4>
             <ul className="space-y-3 opacity-80 font-medium">
@@ -261,7 +275,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Column 4: Contact Info */}
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4>
             <ul className="space-y-4 opacity-80 font-medium">
@@ -282,7 +295,6 @@ export default function Home() {
 
         </div>
 
-        {/* Copyright Line */}
         <div className="container mx-auto px-6 pt-8 border-t border-slate-800 text-center opacity-60">
           <p>© 2026 Pakistan Currency Exchange. All rights reserved.</p>
         </div>
