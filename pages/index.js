@@ -31,7 +31,7 @@ const statsData = [
   { label: "Trusted Customers", value: "10M+" }
 ];
 
-// Asli Logos aur unke pages ke links
+// Clickable Sub-page Links for Partners
 const partnerLogos = [
   { name: "Western Union", url: "/WU logo 2023 (1).png", linkUrl: "/services/western-union" },
   { name: "MoneyGram", url: "/MoneyGram_Logo.png", linkUrl: "/services/moneygram" },
@@ -52,13 +52,13 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* 🧭 Navigation Bar - Centered Content */}
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm flex flex-col items-center">
-        <div className="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
+      {/* 🧭 Navigation Bar */}
+      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <a href="/" className="flex items-center">
              <img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-14 sm:h-16 w-auto object-contain" />
           </a>
-          <div className="hidden md:flex gap-8 justify-center items-center font-bold text-sm uppercase text-slate-700">
+          <div className="hidden md:flex gap-8 font-bold text-sm uppercase text-slate-700">
             <a href="/" className="text-green-700 border-b-2 border-green-700 pb-1">Home</a>
             <a href="/about" className="hover:text-green-700 transition">About Us</a>
             <a href="/services" className="hover:text-green-700 transition">Services</a>
@@ -69,10 +69,10 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* 🚀 Hero Banner Section - Centered */}
+      {/* 🚀 Hero Banner Section */}
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
             <div className="inline-block bg-green-50 text-green-800 font-bold px-4 py-2 rounded-full mb-6 text-sm border border-green-100">🏆 No.1 Currency Exchange in Pakistan</div>
             <h1 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight mb-6">Exchange with <span className="text-green-700">Confidence</span></h1>
             <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">Transparent open-market rates and secure transactions at 150+ branches.</p>
@@ -83,18 +83,13 @@ export default function Home() {
           </motion.div>
           
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex justify-center">
-            <div className="aspect-square w-full max-w-md bg-gradient-to-br from-green-700 to-green-900 rounded-[3rem] overflow-hidden shadow-xl border-4 border-white flex items-center justify-center relative">
-               {/* 🟢 Fallback Text agar image na ho toh khubsurat design aayega */}
-               <div className="absolute text-center text-white p-8">
-                  <h2 className="text-3xl font-black mb-2">Premium Exchange</h2>
-                  <p className="text-green-200">Since 25+ Years</p>
-               </div>
-               {/* 🟢 Asli banner /banner.jpg upload hone par khud ajayega */}
+            <div className="aspect-[4/3] w-full max-w-lg bg-slate-100 rounded-[2rem] overflow-hidden shadow-xl border-4 border-white">
+               {/* 🟢 Yahan Banner fix kiya hai. Ajeeb dabba khatam kar diya. */}
                <img 
                  src="/banner.jpg" 
                  alt="PCE Banner" 
-                 className="w-full h-full object-cover absolute inset-0 z-10" 
-                 onError={(e) => { e.target.style.display = 'none'; }} 
+                 className="w-full h-full object-cover" 
+                 onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=800&q=80'; }} 
                />
             </div>
           </motion.div>
@@ -104,7 +99,7 @@ export default function Home() {
       {/* 💱 Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col items-center">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
             <h3 className="text-2xl font-black mb-6 flex items-center gap-3 text-green-900">
               <RefreshCcw size={28} className="text-green-600" /> Today's Live Rates
             </h3>
@@ -136,9 +131,9 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-green-800 to-green-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden flex flex-col items-center text-center">
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-green-800 to-green-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden flex flex-col justify-center text-center">
             <div className="absolute top-0 right-0 w-64 h-64 bg-green-700 rounded-full blur-3xl -mr-20 -mt-20 opacity-30"></div>
-            <h3 className="text-3xl font-black mb-8 relative z-10 flex items-center gap-3">Instant Converter</h3>
+            <h3 className="text-3xl font-black mb-8 relative z-10 flex items-center justify-center gap-3">Instant Converter</h3>
             <div className="space-y-6 relative z-10 w-full">
               <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm w-full">
                 <label className="text-sm font-bold uppercase tracking-widest text-green-200 block mb-3">You Give (Amount)</label>
@@ -162,8 +157,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📊 Stats Counter Section - Centered */}
-      <section className="py-20 bg-green-900 text-white overflow-hidden relative flex justify-center">
+      {/* 📊 Stats Counter Section */}
+      <section className="py-20 bg-green-900 text-white overflow-hidden relative">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-3 gap-12 text-center w-full">
             {statsData.map((stat, index) => (
@@ -176,8 +171,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 💼 Our Services Section (Nayi tasveer wala design, Centered, Hover effect) */}
-      <section className="py-24 bg-white flex justify-center text-center">
+      {/* 💼 Our Services Section */}
+      <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Our services</h2>
@@ -195,7 +190,6 @@ export default function Home() {
                 viewport={{ once: true }} 
                 className="bg-white border border-slate-200 p-8 rounded-2xl hover:shadow-xl hover:border-green-200 transition duration-300 flex flex-col items-center justify-between text-center w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] group"
               >
-                {/* 🟢 Beautiful Hover: Icon Box Green Ho Jayega */}
                 <div className="w-20 h-20 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-700 shadow-sm transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:scale-110 group-hover:shadow-md">
                   {service.icon}
                 </div>
@@ -210,8 +204,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🛡️ Why Choose Us Section - Centered, Hover Effect */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200 flex justify-center text-center">
+      {/* 🛡️ Why Choose Us Section */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200 text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex flex-col items-center">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2>
@@ -231,16 +225,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🤝 Valued Partners Ticker - CLICKABLE LINKS */}
-      <section className="py-12 bg-white border-t border-slate-100 flex justify-center">
+      {/* 🤝 Valued Partners Ticker - PURANA WALA SAHI LAYOUT WITH LINKS */}
+      <section className="py-12 bg-white border-t border-slate-100">
         <div className="container mx-auto px-6 mb-8 text-center">
           <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p>
         </div>
-        <div className="flex whitespace-nowrap overflow-hidden w-full">
+        {/* 🟢 Layout fixed to scroll smoothly in a single row */}
+        <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 20, repeat: Infinity }} className="flex items-center gap-16 pr-16">
             {[...partnerLogos, ...partnerLogos].map((partner, index) => (
-              /* 🟢 Yeh 'a' tag hai yani is par CLICK kar ke aglay page par ja sakte hain */
-              <a href={partner.linkUrl} key={index} className="px-8 py-4 flex flex-col items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition-all hover:border-green-300">
+              <a href={partner.linkUrl} key={index} className="px-8 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition-all hover:border-green-300 shrink-0">
                 <img 
                   src={partner.url} 
                   alt={partner.name} 
@@ -254,7 +248,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🌐 Footer Section - Centered Properly */}
+      {/* 🌐 Footer Section */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
