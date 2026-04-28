@@ -119,7 +119,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* Navigation Bar */}
+      {/* 1. Navigation Bar */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm flex flex-col items-center">
         <div className="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
           <a href="/"><img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-14 sm:h-16 w-auto object-contain" /></a>
@@ -134,7 +134,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Banner Section */}
+      {/* 2. Hero Banner Section */}
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start text-center lg:text-left">
@@ -154,7 +154,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Live Rates & Converter Section */}
+      {/* 3. Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 flex flex-col items-center">
@@ -192,19 +192,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Counter Section */}
-      <section className="py-20 bg-green-900 text-white overflow-hidden relative">
-        <div className="container mx-auto px-6 relative z-10 text-center"><div className="grid md:grid-cols-3 gap-12">{statsData.map((stat, index) => (
-          <motion.div key={index} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: index * 0.2 }} className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 backdrop-blur-sm">
-            <h3 className="text-6xl font-black mb-2 tracking-tighter">{stat.value}</h3><p className="text-green-300 font-bold uppercase tracking-widest text-sm">{stat.label}</p>
-          </motion.div>
-        ))}</div></div>
-      </section>
-
-      {/* Our Services Section */}
+      {/* 4. Why Choose Us Section (MOVED UP) */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
-          <div className="mb-16"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 text-center">Our services</h2><p className="text-lg text-slate-600 max-w-2xl mx-auto">Currency exchange, live rates, remittance, and support—online and at branches across Pakistan.</p></div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">{reasonsData.map((item, index) => (
+            <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-slate-50 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all border border-slate-100 group flex flex-col items-center">
+              <div className="mb-6 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white border border-slate-100">{item.icon}</div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900">{item.title}</h3><p className="text-slate-500 leading-relaxed text-sm">{item.desc}</p>
+            </motion.div>
+          ))}</div>
+        </div>
+      </section>
+
+      {/* 5. Valued Partners Ticker (MOVED UP) */}
+      <section className="py-12 bg-slate-50 border-t border-b border-slate-200 text-center">
+        <div className="container mx-auto px-6 mb-8"><p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p></div>
+        <div className="flex whitespace-nowrap overflow-hidden"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
+          {[...partnerLogos, ...partnerLogos].map((partner, index) => (
+            <a href={partner.linkUrl} key={index} className="px-6 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 group hover:shadow-md shrink-0 transition-all">
+              <img src={partner.url} alt={partner.name} className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all" />
+            </a>
+          ))}
+        </motion.div></div>
+      </section>
+
+      {/* 6. Our Services Section */}
+      <section className="py-24 bg-white text-center">
+        <div className="container mx-auto px-6">
+          <div className="mb-16"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 text-center">Our services</h2><p className="text-lg text-slate-600 max-w-2xl mx-auto">Currency exchange, live rates, remittance, and support—online and at branches across Pakistan.</p><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
           <div className="flex flex-wrap justify-center gap-6 w-full">{newServicesData.map((service, index) => (
             <motion.a href={service.linkUrl} key={index} className="bg-white border border-slate-200 p-8 rounded-2xl hover:shadow-xl hover:border-green-200 transition duration-300 flex flex-col items-center justify-between text-center w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] group">
               <div className="w-20 h-20 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-700 shadow-sm transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:scale-110">{service.icon}</div>
@@ -215,37 +231,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ SECTION */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="mb-16 text-center">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Frequently Asked Questions (FAQs)</h2>
-            <p className="text-lg text-slate-500 font-medium">Pakistan Currency Exchange</p>
-            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div>
-          </div>
-          <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
-            {displayedFaqs.map((faq, index) => (
-              <FaqItem key={index} faq={faq} />
-            ))}
-            <button onClick={() => setShowAllFaqs(!showAllFaqs)} className="mt-8 w-full py-4 bg-green-50 hover:bg-green-700 hover:text-white text-green-800 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
-              {showAllFaqs ? <>Show Less Questions <ChevronUp size={20} /></> : <>View All FAQs <ChevronDown size={20} /></>}
-            </button>
-          </div>
-        </div>
+      {/* 7. Stats Counter Section */}
+      <section className="py-20 bg-green-900 text-white overflow-hidden relative">
+        <div className="container mx-auto px-6 relative z-10 text-center"><div className="grid md:grid-cols-3 gap-12">{statsData.map((stat, index) => (
+          <motion.div key={index} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: index * 0.2 }} className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 backdrop-blur-sm">
+            <h3 className="text-6xl font-black mb-2 tracking-tighter">{stat.value}</h3><p className="text-green-300 font-bold uppercase tracking-widest text-sm">{stat.label}</p>
+          </motion.div>
+        ))}</div></div>
       </section>
 
-      {/* Blogs & News Section */}
-      <section className="py-24 bg-white border-t border-slate-200 text-center">
+      {/* 8. Blogs & News Section */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200 text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">📰 Blogs & News</h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">Discover industry trends, insights, and expert knowledge in our blog.</p>
             <div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div>
           </div>
-          
           <div className="grid md:grid-cols-3 gap-8">
             {blogData.map((blog, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col group text-left">
+              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col group text-left">
                 <div className="h-56 overflow-hidden relative">
                   <img src={blog.img} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
@@ -260,14 +265,32 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-          
           <div className="mt-16 text-center">
              <a href="/blogs" className="inline-flex items-center justify-center gap-3 bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:border-green-700 hover:text-green-700 transition">View All Articles <ChevronRight size={20} /></a>
           </div>
         </div>
       </section>
 
-      {/* 🌐 NAYA SECTION: Official Market Updates (Bara Widget) */}
+      {/* 9. FAQ SECTION */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="mb-16 text-center">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Frequently Asked Questions (FAQs)</h2>
+            <p className="text-lg text-slate-500 font-medium">Pakistan Currency Exchange</p>
+            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div>
+          </div>
+          <div className="bg-slate-50 p-8 rounded-3xl shadow-sm border border-slate-100">
+            {displayedFaqs.map((faq, index) => (
+              <FaqItem key={index} faq={faq} />
+            ))}
+            <button onClick={() => setShowAllFaqs(!showAllFaqs)} className="mt-8 w-full py-4 bg-white border border-slate-200 hover:bg-green-700 hover:text-white hover:border-green-700 text-green-800 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+              {showAllFaqs ? <>Show Less Questions <ChevronUp size={20} /></> : <>View All FAQs <ChevronDown size={20} /></>}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Official Market Updates (Facebook Live Feed) */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="text-center lg:text-left">
@@ -278,8 +301,6 @@ export default function Home() {
               <Facebook size={24} /> Follow us on Facebook
             </a>
           </div>
-          
-          {/* Facebook Page Plugin Iframe - Maximum Allowed Size (500x650) */}
           <div className="flex justify-center w-full">
             <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-[500px] flex justify-center">
               <iframe 
@@ -298,7 +319,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GET IN TOUCH SECTION */}
+      {/* 11. GET IN TOUCH SECTION */}
       <section className="py-24 bg-green-950 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-green-800/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
         <div className="container mx-auto px-6 relative z-10">
@@ -325,32 +346,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-24 bg-white text-center">
-        <div className="container mx-auto px-6">
-          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">{reasonsData.map((item, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-slate-50 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all border border-slate-100 group flex flex-col items-center">
-              <div className="mb-6 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white border border-slate-100">{item.icon}</div>
-              <h3 className="text-xl font-bold mb-3 text-slate-900">{item.title}</h3><p className="text-slate-500 leading-relaxed text-sm">{item.desc}</p>
-            </motion.div>
-          ))}</div>
-        </div>
-      </section>
-
-      {/* Valued Partners Ticker */}
-      <section className="py-12 bg-white border-t border-slate-100 text-center">
-        <div className="container mx-auto px-6 mb-8"><p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p></div>
-        <div className="flex whitespace-nowrap overflow-hidden"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
-          {[...partnerLogos, ...partnerLogos].map((partner, index) => (
-            <a href={partner.linkUrl} key={index} className="px-6 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 group hover:shadow-md shrink-0 transition-all">
-              <img src={partner.url} alt={partner.name} className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all" />
-            </a>
-          ))}
-        </motion.div></div>
-      </section>
-
-      {/* Footer Section */}
+      {/* 12. Footer Section */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
