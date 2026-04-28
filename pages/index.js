@@ -48,10 +48,29 @@ const partnerLogos = [
   { name: "Aussie Forex", url: "/Aussie Forex&Finance.png", linkUrl: "/services/aussie-forex" }
 ];
 
+// 🟢 Blog Images Fixed with High-Quality Professional Financial Links
 const blogData = [
-  { date: "Oct 04, 2026", title: "Navigating the Foreign Exchange Market", desc: "Expert tips on navigating the complexities of foreign exchange and making smart decisions.", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80", link: "/blogs/foreign-exchange-guide" },
-  { date: "Sep 28, 2026", title: "Top 5 Reasons to Choose Open Market", desc: "Understand why official open market channels are best for your family's remittance.", img: "https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=600&q=80", link: "/blogs/remittance-reasons" },
-  { date: "Sep 15, 2026", title: "Future of Digital Currency", desc: "Discover how technology is reshaping global money transfers across borders.", img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80", link: "/blogs/digital-currency-future" }
+  { 
+    date: "Oct 04, 2026", 
+    title: "Navigating the Foreign Exchange Market", 
+    desc: "Expert tips on navigating the complexities of foreign exchange and making smart decisions for your currency needs.", 
+    img: "https://images.unsplash.com/photo-1526303328194-ed3340877c4f?auto=format&fit=crop&w=800&q=80", 
+    link: "/blogs/foreign-exchange-guide" 
+  },
+  { 
+    date: "Sep 28, 2026", 
+    title: "Top 5 Reasons to Choose Open Market", 
+    desc: "Understand why official open market channels and Cat-A exchange companies are the safest for your family's remittance.", 
+    img: "https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=800&q=80", 
+    link: "/blogs/remittance-reasons" 
+  },
+  { 
+    date: "Sep 15, 2026", 
+    title: "Future of Digital Currency", 
+    desc: "Discover how technology and digital solutions are reshaping global money transfers and open market exchange.", 
+    img: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80", 
+    link: "/blogs/digital-currency-future" 
+  }
 ];
 
 function AnimatedCounter({ value, suffix = "" }) {
@@ -60,20 +79,8 @@ function AnimatedCounter({ value, suffix = "" }) {
   const count = useMotionValue(0);
   const rounded = useSpring(count, { stiffness: 50, damping: 20 });
   const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    if (inView) {
-      const numericValue = parseInt(value.replace(/\D/g, ''));
-      count.set(numericValue);
-    }
-  }, [inView, count, value]);
-
-  useEffect(() => {
-    return rounded.on("change", (latest) => {
-      setDisplayValue(Math.floor(latest));
-    });
-  }, [rounded]);
-
+  useEffect(() => { if (inView) { const numericValue = parseInt(value.replace(/\D/g, '')); count.set(numericValue); } }, [inView, count, value]);
+  useEffect(() => { return rounded.on("change", (latest) => { setDisplayValue(Math.floor(latest)); }); }, [rounded]);
   return <span ref={ref}>{displayValue}{suffix}</span>;
 }
 
@@ -100,9 +107,7 @@ export default function Home() {
   const [amount, setAmount] = useState(100);
   const [selectedCurrency, setSelectedCurrency] = useState(ratesData[0]);
   const [showAllRates, setShowAllRates] = useState(false);
-  
   const displayedRates = showAllRates ? ratesData : ratesData.slice(0, 5);
-
   const result = (amount * selectedCurrency.sell).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
@@ -123,7 +128,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* 2. Hero */}
+      {/* 2. Hero Section */}
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start text-center lg:text-left">
@@ -192,7 +197,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Partners */}
+      {/* 5. Partners Section */}
       <section className="py-16 bg-slate-50 border-t border-b border-slate-200 text-center">
         <div className="container mx-auto px-6 mb-12 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Our Valued Partners</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
         <div className="flex whitespace-nowrap overflow-hidden"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
@@ -204,7 +209,7 @@ export default function Home() {
         </motion.div></div>
       </section>
 
-      {/* 6. Services */}
+      {/* 6. Services Section */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Our services</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
@@ -218,7 +223,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Stats Counter */}
+      {/* 7. Stats Counter (Modern counting effect) */}
       <section className="py-24 bg-green-900 text-white overflow-hidden relative text-center">
         <div className="container mx-auto px-6 relative z-10 flex flex-col items-center mb-16"><h2 className="text-4xl md:text-5xl font-black text-white mb-4">Pakistan's Most Trusted</h2><div className="h-1 w-20 bg-white rounded-full"></div></div>
         <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-3 gap-12 max-w-5xl">
@@ -237,14 +242,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Blogs */}
+      {/* 8. Blogs Section (NEW PHOTOS FIXED) */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Blogs & News</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
           <div className="grid md:grid-cols-3 gap-8">
             {blogData.map((blog, index) => (
-              <motion.div key={index} className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all border border-slate-100 flex flex-col group text-left">
-                <div className="h-56 overflow-hidden relative border-b border-slate-100"><img src={blog.img} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all border border-slate-100 flex flex-col group text-left">
+                <div className="h-56 overflow-hidden relative border-b border-slate-100">
+                  <img src={blog.img} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
                 <div className="p-8 flex flex-col flex-grow">
                   <span className="text-green-600 font-bold text-sm mb-3 tracking-wider uppercase">{blog.date}</span>
                   <h3 className="text-xl font-bold text-green-950 mb-3 line-clamp-2">{blog.title}</h3>
@@ -257,7 +264,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 9. FAQs */}
+      {/* 9. FAQs Section */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 max-w-4xl border border-slate-200 bg-white p-12 rounded-[2.5rem] shadow-xl">
           <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">Frequently Asked Questions</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
@@ -265,7 +272,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. Facebook Feed */}
+      {/* 10. Facebook Feed Section */}
       <section className="py-24 bg-white border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="text-center lg:text-left">
@@ -282,14 +289,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11. Contact */}
+      {/* 11. Contact Section */}
       <section className="py-24 bg-green-950 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-green-800/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
         <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black mb-4 text-white">Get in touch</h2>
           <div className="h-1 w-20 bg-white mx-auto rounded-full mt-4"></div>
         </div>
-        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-3 gap-8 max-w-5xl">
+        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <a href="https://api.whatsapp.com/send?phone=923046668810" target="_blank" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white shadow-xl">
             <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center"><MessageCircle size={32} /></div><span className="text-xl font-bold">WhatsApp us</span></div>
             <ChevronRight size={24} />
@@ -305,12 +312,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. Footer */}
+      {/* 12. Footer Section */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
             <img src="/Pakistan Currency Logo.png" alt="PCE" className="h-12 w-auto bg-white rounded-lg p-1 mb-6" />
-            <p className="leading-relaxed opacity-80 mb-6">Pakistan's most trusted currency exchange network.</p>
+            <p className="leading-relaxed opacity-80 mb-6 text-center md:text-left">Pakistan's most trusted currency exchange network.</p>
             <div className="flex items-center gap-4">
               <a href="https://facebook.com/pkcurrency/" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Facebook size={20} /></a>
               <a href="https://instagram.com/pakistancurrency" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Instagram size={20} /></a>
