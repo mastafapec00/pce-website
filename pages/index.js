@@ -267,11 +267,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📱 NAYA SECTION: Social Media Activity (Facebook Live Feed) */}
+      {/* 🌐 NAYA SECTION: Official Market Updates (Bara Widget) */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="text-center lg:text-left">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">📱 Social Media Activity</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🌐 Official Market Updates</h2>
             <div className="h-1 w-20 bg-blue-600 mx-auto lg:mx-0 rounded-full mb-6"></div>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">Stay updated with our latest daily open-market exchange rates, financial news, and exclusive updates directly from our official Facebook page. Don't miss out on important announcements!</p>
             <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-blue-600/30">
@@ -279,13 +279,13 @@ export default function Home() {
             </a>
           </div>
           
-          {/* Facebook Page Plugin Iframe */}
+          {/* Facebook Page Plugin Iframe - Maximum Allowed Size (500x650) */}
           <div className="flex justify-center w-full">
-            <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-[400px] flex justify-center">
+            <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-[500px] flex justify-center">
               <iframe 
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpkcurrency&tabs=timeline&width=400&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-                width="400" 
-                height="500" 
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpkcurrency&tabs=timeline&width=500&height=650&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+                width="500" 
+                height="650" 
                 style={{border:"none", overflow:"hidden", maxWidth: '100%'}} 
                 scrolling="no" 
                 frameBorder="0" 
