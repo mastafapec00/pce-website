@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { Phone, ArrowRightLeft, Menu, RefreshCcw, ShieldCheck, Zap, Globe, CreditCard, Headphones, MapPin, Mail, Building, LineChart, ClipboardList, Wallet, HelpCircle, ChevronRight, ChevronDown, ChevronUp, Facebook, Instagram, MessageCircle, Plus, Minus, ArrowRight } from 'lucide-react';
 
 const ratesData = [
@@ -26,17 +26,7 @@ const faqsData = [
   { q: "How can I check today's exchange rates?", a: "You can check today's latest buying and selling rates on our website's live rates section or by visiting any Pakistan Currency Exchange branch across the country." },
   { q: "Where can I exchange foreign currency in Pakistan?", a: "Pakistan Currency Exchange has a massive network of over 150 branches across Pakistan. Simply visit our nearest branch with your valid identification." },
   { q: "Does PCE offer corporate exchange services?", a: "Yes, we provide specialized foreign exchange and remittance solutions for businesses and corporate clients with competitive rates and dedicated support." },
-  { q: "Can I convert PKR to foreign currency online?", a: "Currently, currency conversion is performed in-person at our branches to comply with SBP regulations, but you can check rates and book transactions via phone." },
-  { q: "How can I find the nearest PCE branch?", a: "Use our Branch Locator tool on the website to find a branch near you, along with contact details and business hours." },
-  { q: "Can I pay my foreign university fees through PCE?", a: "Yes, we facilitate educational fee transfers to foreign universities. You will need to provide the university's offer letter and fee invoice." },
-  { q: "Where can I pay my study abroad related fee?", a: "You can pay study-related expenses including university fees and living expenses at any of our authorized branches following SBP guidelines." },
-  { q: "How can I send personal money abroad?", a: "Personal remittances can be sent through our secure channels (TT/DD) for approved purposes such as family maintenance, medical, or education." },
-  { q: "What currencies are available for Hajj or Umrah?", a: "We maintain ample stocks of Saudi Riyals (SAR) and US Dollars (USD) specifically for pilgrims at very competitive rates." },
-  { q: "Which major currencies are bought and sold at PCE?", a: "We deal in all major global currencies including USD, GBP, EUR, SAR, AED, CAD, AUD, and many more." },
-  { q: "Is PCE a licensed exchange company?", a: "Yes, Pakistan Currency Exchange is a fully licensed Category 'A' Exchange Company, regulated and authorized by the State Bank of Pakistan." },
-  { q: "Can overseas Pakistanis send money via PCE?", a: "Absolutely. We have partnerships with global giants like Western Union and MoneyGram to ensure your family receives money instantly." },
-  { q: "What documents are required for currency exchange?", a: "For most transactions, a valid original CNIC (for Pakistanis) or Passport (for foreigners) is required to comply with AML/KYC regulations." },
-  { q: "Why choose Pakistan Currency Exchange?", a: "With over 25 years of trust, 150+ branches, and competitive rates, we are Pakistan's most reliable name in the foreign exchange industry." }
+  { q: "Can I convert PKR to foreign currency online?", a: "Currently, currency conversion is performed in-person at our branches to comply with SBP regulations, but you can check rates and book transactions via phone." }
 ];
 
 const reasonsData = [
@@ -44,10 +34,6 @@ const reasonsData = [
   { title: "Fast Processing", desc: "Swift remittance and exchange services without delays.", icon: <Zap size={32} /> },
   { title: "Global Reach", desc: "Connected with top global financial partners worldwide.", icon: <Globe size={32} /> },
   { title: "24/7 Support", desc: "Dedicated customer care team for your peace of mind.", icon: <Headphones size={32} /> }
-];
-
-const statsData = [
-  { label: "Years' Expertise", value: "25+" }, { label: "Branches in Pakistan", value: "150+" }, { label: "Trusted Customers", value: "10M+" }
 ];
 
 const partnerLogos = [
@@ -63,28 +49,34 @@ const partnerLogos = [
 ];
 
 const blogData = [
-  {
-    date: "Oct 04, 2024",
-    title: "Navigating the Foreign Exchange Market: A Beginner's Guide",
-    desc: "Explore expert tips and insights on navigating the complexities of foreign exchange and making smart decisions.",
-    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80",
-    link: "/blogs/foreign-exchange-guide"
-  },
-  {
-    date: "Sep 28, 2024",
-    title: "Top 5 Reasons to Choose Open Market for Remittance",
-    desc: "Understand why sending and receiving money through official open market channels is best and safe for your family.",
-    img: "https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=600&q=80",
-    link: "/blogs/remittance-reasons"
-  },
-  {
-    date: "Sep 15, 2024",
-    title: "Future of Digital Currency and Global Transfers",
-    desc: "Discover how technology is reshaping the way we send money across international borders in the modern world.",
-    img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80",
-    link: "/blogs/digital-currency-future"
-  }
+  { date: "Oct 04, 2026", title: "Navigating the Foreign Exchange Market", desc: "Expert tips on navigating the complexities of foreign exchange and making smart decisions.", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80", link: "/blogs/foreign-exchange-guide" },
+  { date: "Sep 28, 2026", title: "Top 5 Reasons to Choose Open Market", desc: "Understand why official open market channels are best for your family's remittance.", img: "https://images.unsplash.com/photo-1580519542036-ed47f3e42214?auto=format&fit=crop&w=600&q=80", link: "/blogs/remittance-reasons" },
+  { date: "Sep 15, 2026", title: "Future of Digital Currency", desc: "Discover how technology is reshaping global money transfers across borders.", img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80", link: "/blogs/digital-currency-future" }
 ];
+
+// 🟢 Custom Modern Counter Component
+function AnimatedCounter({ value, suffix = "" }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  const count = useMotionValue(0);
+  const rounded = useSpring(count, { stiffness: 50, damping: 20 });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (inView) {
+      const numericValue = parseInt(value.replace(/\D/g, ''));
+      count.set(numericValue);
+    }
+  }, [inView, count, value]);
+
+  useEffect(() => {
+    return rounded.on("change", (latest) => {
+      setDisplayValue(Math.floor(latest));
+    });
+  }, [rounded]);
+
+  return <span ref={ref}>{displayValue}{suffix}</span>;
+}
 
 function FaqItem({ faq }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -119,6 +111,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
+      {/* 1. Navigation */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm flex flex-col items-center">
         <div className="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
           <a href="/"><img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-14 sm:h-16 w-auto object-contain" /></a>
@@ -133,12 +126,13 @@ export default function Home() {
         </div>
       </nav>
 
+      {/* 2. Hero */}
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="inline-block bg-green-50 text-green-800 font-semibold px-4 py-2 rounded-full mb-6 text-sm border border-green-100 uppercase tracking-wide">🏆 Pakistan's No.1 Cat-A Exchange Company</div>
+            <div className="inline-block bg-green-50 text-green-800 font-bold px-4 py-2 rounded-full mb-6 text-sm border border-green-100 uppercase tracking-wide">🏆 Cat-A Exchange Company</div>
             <h1 className="text-5xl lg:text-7xl font-black text-green-950 leading-tight mb-6">Exchange with <span className="text-green-700">Confidence</span></h1>
-            <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">Over 25 years of trust, offering transparent open-market rates and secure transactions at 150+ branches.</p>
+            <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">Over 25 years of trust, offering transparent open-market rates at 150+ branches.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a href="/rates" className="bg-green-700 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-green-800 transition flex items-center justify-center gap-3">Check Today's Rates <ArrowRightLeft size={20} /></a>
               <button className="bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:border-green-700 hover:text-green-700 transition flex items-center justify-center gap-3"><Phone size={20} /> WhatsApp Us</button>
@@ -152,9 +146,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 3. Rates & Converter */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
-          {/* 🟢 FIXED HEIGHT Rates Box */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-[620px] flex flex-col items-center">
             <div className="p-8 w-full bg-white flex items-center justify-center gap-3"><RefreshCcw size={28} className="text-green-600" /><h3 className="text-3xl font-black text-green-950 text-center">Today's Live Rates</h3></div>
             <div className="overflow-y-auto flex-grow w-full border-t border-b border-slate-100">
@@ -173,8 +167,6 @@ export default function Home() {
             </div>
             <div className="w-full p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-center text-green-800 font-medium text-sm">Scroll for more currencies</div>
           </motion.div>
-          
-          {/* 🟢 FIXED HEIGHT Converter Box */}
           <div className="sticky top-24"><motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-green-800 to-green-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden h-[620px] flex flex-col justify-center text-center">
             <div className="absolute top-0 right-0 w-64 h-64 bg-green-700 rounded-full blur-3xl -mr-20 -mt-20 opacity-30"></div>
             <h3 className="text-3xl font-black mb-8 relative z-10 flex items-center justify-center gap-3">Instant Converter</h3>
@@ -190,10 +182,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Why Choose Us Section */}
+      {/* 4. Why Choose Us */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="mb-16 flex flex-col items-center"><span className="text-lg font-semibold tracking-wider text-green-800 uppercase mb-3">Core Advantages</span><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🛡️ Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🛡️ Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">{reasonsData.map((item, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-slate-50 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all border border-slate-100 group flex flex-col items-center">
               <div className="mb-6 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-green-700 transition-all duration-300 group-hover:bg-green-700 group-hover:text-white border border-slate-100">{item.icon}</div>
@@ -203,10 +195,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Valued Partners Ticker */}
+      {/* 5. Partners */}
       <section className="py-16 bg-slate-50 border-t border-b border-slate-200 text-center">
-        {/* 🟢 Headings Fixed & Colored */}
-        <div className="container mx-auto px-6 mb-12 flex flex-col items-center"><span className="text-lg font-semibold tracking-wider text-green-800 uppercase mb-3">Our Network</span><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🤝 Our Valued Partners</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
+        <div className="container mx-auto px-6 mb-12 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🤝 Our Valued Partners</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
         <div className="flex whitespace-nowrap overflow-hidden"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
           {[...partnerLogos, ...partnerLogos].map((partner, index) => (
             <a href={partner.linkUrl} key={index} className="px-6 py-4 flex items-center justify-center w-48 h-24 bg-white rounded-xl shadow-sm border border-slate-100 group hover:shadow-md shrink-0 transition-all">
@@ -216,11 +207,10 @@ export default function Home() {
         </motion.div></div>
       </section>
 
-      {/* 6. Our Services Section */}
+      {/* 6. Services */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
-          {/* 🟢 Headings Fixed & Colored */}
-          <div className="mb-16 flex flex-col items-center"><span className="text-lg font-semibold tracking-wider text-green-800 uppercase mb-3">Cat-A Exchange Solutions</span><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">💼 Our services</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div><p className="text-lg text-slate-600 max-w-2xl mx-auto mt-6">Secure and reliable financial solutions including currency exchange, live rates, remittance, and expert support across Pakistan.</p></div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">💼 Our services</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
           <div className="flex flex-wrap justify-center gap-6 w-full">{newServicesData.map((service, index) => (
             <motion.a href={service.linkUrl} key={index} className="bg-white border border-slate-200 p-8 rounded-2xl hover:shadow-xl hover:border-green-200 transition duration-300 flex flex-col items-center justify-between text-center w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] group">
               <div className="w-20 h-20 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-green-700 shadow-sm transition-all duration-300 group-hover:bg-green-700 group-hover:text-white group-hover:scale-110">{service.icon}</div>
@@ -231,33 +221,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Stats Counter Section */}
+      {/* 7. Stats Counter (Modern Counting Animation) */}
       <section className="py-24 bg-green-900 text-white overflow-hidden relative">
-        {/* 🟢 Headings Fixed & Colored White */}
-        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mb-16"><span className="text-lg font-semibold tracking-wider text-green-300 uppercase mb-3">Proven Success</span><h2 className="text-4xl md:text-5xl font-black text-white mb-4">📊 Pakistan's Most Trusted</h2><div className="h-1 w-20 bg-white rounded-full"></div></div>
-        <div className="container mx-auto px-6 relative z-10 text-center max-w-5xl"><div className="grid md:grid-cols-3 gap-12">{statsData.map((stat, index) => (
-          <motion.div key={index} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: index * 0.2 }} className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 backdrop-blur-sm shadow-xl">
-            <h3 className="text-6xl font-black mb-2 tracking-tighter text-white">{stat.value}</h3><p className="text-green-300 font-bold uppercase tracking-widest text-sm">{stat.label}</p>
-          </motion.div>
-        ))}</div></div>
+        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mb-16"><h2 className="text-4xl md:text-5xl font-black text-white mb-4">📊 Pakistan's Most Trusted</h2><div className="h-1 w-20 bg-white rounded-full"></div></div>
+        <div className="container mx-auto px-6 relative z-10 text-center max-w-5xl"><div className="grid md:grid-cols-3 gap-12">
+          <div className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 shadow-xl">
+            <h3 className="text-6xl font-black mb-2 tracking-tighter text-white"><AnimatedCounter value="25" suffix="+" /></h3>
+            <p className="text-green-300 font-bold uppercase tracking-widest text-sm">Years' Expertise</p>
+          </div>
+          <div className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 shadow-xl">
+            <h3 className="text-6xl font-black mb-2 tracking-tighter text-white"><AnimatedCounter value="150" suffix="+" /></h3>
+            <p className="text-green-300 font-bold uppercase tracking-widest text-sm">Branches in Pakistan</p>
+          </div>
+          <div className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 shadow-xl">
+            <h3 className="text-6xl font-black mb-2 tracking-tighter text-white"><AnimatedCounter value="10" suffix="M+" /></h3>
+            <p className="text-green-300 font-bold uppercase tracking-widest text-sm">Trusted Customers</p>
+          </div>
+        </div></div>
       </section>
 
-      {/* 8. Blogs & News Section */}
+      {/* 8. Blogs */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6 max-w-7xl">
-          {/* 🟢 Headings Fixed & Colored */}
-          <div className="mb-16 flex flex-col items-center">
-            <span className="text-lg font-semibold tracking-wider text-green-800 uppercase mb-3">Market Insights</span>
-            <h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">📰 Blogs & News</h2>
-            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto mt-6">Discover industry trends, insights, and expert knowledge in our blog.</p>
-          </div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">📰 Blogs & News</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
           <div className="grid md:grid-cols-3 gap-8">
             {blogData.map((blog, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }} className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col group text-left">
-                <div className="h-56 overflow-hidden relative border-b border-slate-100">
-                  <img src={blog.img} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
+              <motion.div key={index} className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all border border-slate-100 flex flex-col group text-left">
+                <div className="h-56 overflow-hidden relative border-b border-slate-100"><img src={blog.img} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
                 <div className="p-8 flex flex-col flex-grow">
                   <span className="text-green-600 font-bold text-sm mb-3 tracking-wider uppercase">{blog.date}</span>
                   <h3 className="text-xl font-bold text-green-950 mb-3 line-clamp-2">{blog.title}</h3>
@@ -267,45 +257,25 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-          <div className="mt-16 text-center">
-             <a href="/blogs" className="inline-flex items-center justify-center gap-3 bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold hover:border-green-700 hover:text-green-700 transition">View All Articles <ChevronRight size={20} /></a>
-          </div>
         </div>
       </section>
 
-      {/* 9. FAQ SECTION */}
+      {/* 9. FAQs */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 max-w-4xl border border-slate-200 bg-white p-12 rounded-[2.5rem] shadow-xl">
-          {/* 🟢 Headings Fixed & Colored */}
-          <div className="mb-16 flex flex-col items-center">
-            <span className="text-lg font-semibold tracking-wider text-green-800 uppercase mb-3">Help Center</span>
-            <h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">❓ Frequently Asked Questions</h2>
-            <div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div>
-            <p className="text-lg text-slate-500 font-medium mt-6">Pakistan Currency Exchange Services</p>
-          </div>
-          <div className="">
-            {displayedFaqs.map((faq, index) => (
-              <FaqItem key={index} faq={faq} />
-            ))}
-            <button onClick={() => setShowAllFaqs(!showAllFaqs)} className="mt-8 w-full py-4 bg-slate-50 hover:bg-green-700 hover:text-white hover:border-green-700 text-green-800 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
-              {showAllFaqs ? <>Show Less Questions <ChevronUp size={20} /></> : <>View All FAQs <ChevronDown size={20} /></>}
-            </button>
-          </div>
+          <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">❓ Frequently Asked Questions</h2><div className="h-1 w-20 bg-green-600 mx-auto rounded-full mt-4"></div></div>
+          <div className="">{displayedFaqs.map((faq, index) => (<FaqItem key={index} faq={faq} />))}</div>
         </div>
       </section>
 
-      {/* 10. Official Market Updates */}
+      {/* 10. Facebook Feed */}
       <section className="py-24 bg-white border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          {/* 🟢 Headings Fixed & Colored */}
           <div className="text-center lg:text-left">
-            <span className="text-lg font-semibold tracking-wider text-blue-800 uppercase mb-3 block">Live Feed</span>
             <h2 className="text-4xl md:text-5xl font-black text-green-950 mb-4">🌐 Official Market Updates</h2>
             <div className="h-1 w-20 bg-blue-600 mx-auto lg:mx-0 rounded-full mb-6"></div>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">Stay updated with our latest daily open-market exchange rates, financial news, and exclusive updates directly from our official Facebook page. Don't miss out on important announcements!</p>
-            <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-blue-600/30">
-              <Facebook size={24} /> Follow us on Facebook
-            </a>
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">Stay updated with our latest daily open-market exchange rates directly from our official Facebook page.</p>
+            <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition">Follow us on Facebook</a>
           </div>
           <div className="flex justify-center w-full">
             <div className="bg-slate-50 rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-[500px] flex justify-center">
@@ -315,40 +285,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11. GET IN TOUCH SECTION */}
+      {/* 11. Contact */}
       <section className="py-24 bg-green-950 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-green-800/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
-        {/* 🟢 Headings Fixed & Colored White */}
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="mb-16 text-center text-white flex flex-col items-center">
-            <span className="text-lg font-semibold tracking-wider text-green-300 uppercase mb-3">Contact channels</span>
-            <h2 className="text-4xl md:text-5xl font-black mb-4 flex items-center justify-center gap-4 text-white"><span className="text-4xl">📞</span> Get in touch</h2>
-            <div className="h-1 w-20 bg-white mx-auto rounded-full mt-4"></div>
-            <p className="text-lg text-green-200 font-medium max-w-2xl mx-auto mt-6">Our dedicated support team is here to assist you through various channels. Reach out today for Cat-A exchange services.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <a href="https://api.whatsapp.com/send?phone=923046668810" target="_blank" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between">
-              <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform"><MessageCircle size={32} /></div><span className="text-xl font-bold text-white">WhatsApp us</span></div>
-              <ChevronRight className="text-green-400 group-hover:translate-x-2 transition-transform" size={24} />
-            </a>
-            <a href="/branches" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between">
-              <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform"><MapPin size={32} /></div><span className="text-xl font-bold text-white">Find near branch</span></div>
-              <ChevronRight className="text-green-400 group-hover:translate-x-2 transition-transform" size={24} />
-            </a>
-            <a href="/contact" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between">
-              <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform"><Building size={32} /></div><span className="text-xl font-bold text-white">Submit a complaint</span></div>
-              <ChevronRight className="text-green-400 group-hover:translate-x-2 transition-transform" size={24} />
-            </a>
-          </div>
+        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-black mb-4 flex items-center justify-center gap-4 text-white">📞 Get in touch</h2>
+          <div className="h-1 w-20 bg-white mx-auto rounded-full mt-4"></div>
+        </div>
+        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <a href="https://api.whatsapp.com/send?phone=923046668810" target="_blank" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white">
+            <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center"><MessageCircle size={32} /></div><span className="text-xl font-bold">WhatsApp us</span></div>
+            <ChevronRight size={24} />
+          </a>
+          <a href="/branches" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white">
+            <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center"><MapPin size={32} /></div><span className="text-xl font-bold">Find branch</span></div>
+            <ChevronRight size={24} />
+          </a>
+          <a href="/contact" className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all group flex items-center justify-between text-white">
+            <div className="flex items-center gap-5"><div className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center"><Building size={32} /></div><span className="text-xl font-bold">Complaint</span></div>
+            <ChevronRight size={24} />
+          </a>
         </div>
       </section>
 
-      {/* 12. Footer Section */}
+      {/* 12. Footer */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
             <img src="/Pakistan Currency Logo.png" alt="PCE" className="h-12 w-auto bg-white rounded-lg p-1 mb-6" />
-            <p className="leading-relaxed opacity-80 mb-6">Pakistan's most trusted currency exchange network, providing secure and fast financial solutions.</p>
+            <p className="leading-relaxed opacity-80 mb-6 text-center md:text-left">Pakistan's most trusted currency exchange network.</p>
             <div className="flex items-center gap-4">
               <a href="https://facebook.com/pkcurrency/" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Facebook size={20} /></a>
               <a href="https://instagram.com/pakistancurrency" target="_blank" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all"><Instagram size={20} /></a>
@@ -357,7 +322,7 @@ export default function Home() {
           <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Company</h4><ul className="space-y-3 font-medium"><li><a href="/about" className="hover:text-green-400">About Us</a></li><li><a href="/branches" className="hover:text-green-400">Branch Locator</a></li></ul></div>
           <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4><ul className="space-y-3 font-medium"><li><a href="/rates" className="hover:text-green-400">Live Rates</a></li><li><a href="/contact" className="hover:text-green-400">Terms & Conditions</a></li></ul></div>
           <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4><ul className="space-y-4 font-medium">
-            <li className="flex items-center justify-center md:justify-start gap-3"><MapPin size={20} className="text-green-500 shrink-0" /><span>Head Office, Karachi, Pakistan</span></li>
+            <li className="flex items-center justify-center md:justify-start gap-3"><MapPin size={20} className="text-green-500 shrink-0" /><span>Karachi, Pakistan</span></li>
             <li className="flex items-center justify-center md:justify-start gap-3"><Phone size={20} className="text-green-500 shrink-0" /><span>UAN: 0800-13537</span></li>
             <li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={20} className="text-green-500 shrink-0" /><span>0304-6668810</span></li>
           </ul></div>
