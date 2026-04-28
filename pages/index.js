@@ -108,13 +108,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Live Rates & Converter Section */}
+      {/* 💱 Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
           
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 flex flex-col items-center">
             <div className="p-8 w-full bg-white">
-              <h3 className="text-2xl font-black flex items-center gap-3 text-green-900">
+              {/* 🟢 Yahan text ko center aur bold (text-3xl font-black) kar diya hai Instant Converter jaisa */}
+              <h3 className="text-3xl font-black flex items-center justify-center gap-3 text-green-900">
                 <RefreshCcw size={28} className="text-green-600" /> Today's Live Rates
               </h3>
             </div>
