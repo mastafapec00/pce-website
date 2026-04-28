@@ -59,11 +59,11 @@ export default function Home() {
             <span className="font-black text-xl tracking-tight text-green-900 uppercase">Pakistan Currency</span>
           </motion.div>
           <div className="hidden md:flex gap-8 font-bold text-sm uppercase text-slate-600">
-            <a href="#" className="text-green-700 border-b-2 border-green-700 pb-1">Home</a>
-            <a href="#" className="hover:text-green-700 transition">About Us</a>
-            <a href="#" className="hover:text-green-700 transition">Services</a>
-            <a href="#" className="hover:text-green-700 transition">Branches</a>
-            <a href="#" className="hover:text-green-700 transition">Live Rates</a>
+            <a href="/" className="text-green-700 border-b-2 border-green-700 pb-1">Home</a>
+            <a href="/about" className="hover:text-green-700 transition">About Us</a>
+            <a href="/services" className="hover:text-green-700 transition">Services</a>
+            <a href="/branches" className="hover:text-green-700 transition">Branches</a>
+            <a href="/rates" className="hover:text-green-700 transition">Live Rates</a>
           </div>
           <button className="md:hidden text-green-800"><Menu size={28} /></button>
         </div>
