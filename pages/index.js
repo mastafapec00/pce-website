@@ -62,7 +62,6 @@ const partnerLogos = [
   { name: "Aussie Forex", url: "/Aussie Forex&Finance.png", linkUrl: "/services/aussie-forex" }
 ];
 
-// 🟢 Naya Blog Data
 const blogData = [
   {
     date: "Oct 04, 2024",
@@ -119,6 +118,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      
+      {/* Navigation Bar */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm flex flex-col items-center">
         <div className="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
           <a href="/"><img src="/Pakistan Currency Logo.png" alt="PCE Logo" className="h-14 sm:h-16 w-auto object-contain" /></a>
@@ -133,6 +134,7 @@ export default function Home() {
         </div>
       </nav>
 
+      {/* Hero Banner Section */}
       <section className="relative overflow-hidden bg-white py-20 lg:py-32">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center lg:items-start text-center lg:text-left">
@@ -152,6 +154,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Live Rates & Converter Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 flex flex-col items-center">
@@ -189,6 +192,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats Counter Section */}
       <section className="py-20 bg-green-900 text-white overflow-hidden relative">
         <div className="container mx-auto px-6 relative z-10 text-center"><div className="grid md:grid-cols-3 gap-12">{statsData.map((stat, index) => (
           <motion.div key={index} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: index * 0.2 }} className="p-8 rounded-3xl bg-green-800/50 border border-green-700/50 backdrop-blur-sm">
@@ -197,6 +201,7 @@ export default function Home() {
         ))}</div></div>
       </section>
 
+      {/* Our Services Section */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 text-center">Our services</h2><p className="text-lg text-slate-600 max-w-2xl mx-auto">Currency exchange, live rates, remittance, and support—online and at branches across Pakistan.</p></div>
@@ -210,7 +215,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🚀 FAQ SECTION */}
+      {/* FAQ SECTION */}
       <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="mb-16 text-center">
@@ -229,7 +234,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📰 NAYA SECTION: Blogs & News */}
+      {/* Blogs & News Section */}
       <section className="py-24 bg-white border-t border-slate-200 text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16">
@@ -262,7 +267,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📞 GET IN TOUCH SECTION */}
+      {/* 📱 NAYA SECTION: Social Media Activity (Facebook Live Feed) */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200">
+        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="text-center lg:text-left">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">📱 Social Media Activity</h2>
+            <div className="h-1 w-20 bg-blue-600 mx-auto lg:mx-0 rounded-full mb-6"></div>
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">Stay updated with our latest daily open-market exchange rates, financial news, and exclusive updates directly from our official Facebook page. Don't miss out on important announcements!</p>
+            <a href="https://www.facebook.com/pkcurrency/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-blue-600/30">
+              <Facebook size={24} /> Follow us on Facebook
+            </a>
+          </div>
+          
+          {/* Facebook Page Plugin Iframe */}
+          <div className="flex justify-center w-full">
+            <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-[400px] flex justify-center">
+              <iframe 
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpkcurrency&tabs=timeline&width=400&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+                width="400" 
+                height="500" 
+                style={{border:"none", overflow:"hidden", maxWidth: '100%'}} 
+                scrolling="no" 
+                frameBorder="0" 
+                allowFullScreen={true} 
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                title="PCE Facebook Feed"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GET IN TOUCH SECTION */}
       <section className="py-24 bg-green-950 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-green-800/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
         <div className="container mx-auto px-6 relative z-10">
@@ -289,6 +325,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why Choose Us Section */}
       <section className="py-24 bg-white text-center">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex flex-col items-center"><h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">🛡️ Why Choose Us?</h2><div className="h-1 w-20 bg-green-600 rounded-full"></div></div>
@@ -301,6 +338,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Valued Partners Ticker */}
       <section className="py-12 bg-white border-t border-slate-100 text-center">
         <div className="container mx-auto px-6 mb-8"><p className="text-slate-400 font-bold uppercase tracking-widest text-sm">🤝 Our Valued Partners</p></div>
         <div className="flex whitespace-nowrap overflow-hidden"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 25, repeat: Infinity }} className="flex items-center gap-10 pr-10">
@@ -312,7 +350,7 @@ export default function Home() {
         </motion.div></div>
       </section>
 
-      {/* Footer Section with Updated Numbers */}
+      {/* Footer Section */}
       <footer className="bg-slate-950 text-slate-300 py-16 text-sm border-t-4 border-green-700">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
@@ -327,7 +365,6 @@ export default function Home() {
           <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Support</h4><ul className="space-y-3 font-medium"><li><a href="/rates" className="hover:text-green-400">Live Rates</a></li><li><a href="/contact" className="hover:text-green-400">Terms & Conditions</a></li></ul></div>
           <div><h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contact Us</h4><ul className="space-y-4 font-medium">
             <li className="flex items-center justify-center md:justify-start gap-3"><MapPin size={20} className="text-green-500" /><span>Head Office, Karachi, Pakistan</span></li>
-            {/* 🟢 Yahan dono naye numbers update kar diye hain */}
             <li className="flex items-center justify-center md:justify-start gap-3"><Phone size={20} className="text-green-500" /><span>UAN: 0800-13537</span></li>
             <li className="flex items-center justify-center md:justify-start gap-3"><MessageCircle size={20} className="text-green-500" /><span>0304-6668810</span></li>
           </ul></div>
